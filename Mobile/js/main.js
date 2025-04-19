@@ -28,6 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
             feature.classList.add('fade-in');
         }, 800 + (index * 200)); // Staggered delay for each feature
     });
+
+    // Add animation to the services section
+    const servicesSection = document.querySelector('.services-section');
+    setTimeout(() => {
+        servicesSection.classList.add('fade-in');
+    }, 1200);
+
+    // Add animation to service items with staggered delay
+    const serviceItems = document.querySelectorAll('.service-item');
+    serviceItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.add('fade-in');
+        }, 1400 + (index * 200)); // Staggered delay for each service item
+    });
 });
 
 // Add a simple fade-in animation when the page loads

@@ -36,23 +36,20 @@ html, body {
     /* Removed fixed height to allow content to determine height */
 }
 
-/* Top logos */
-.top-logos {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 2px;
-    height: 25px;
+/* Top bar */
+.top-bar {
+    height: 15px;
+    width: 100%;
 }
 
-.logo-left, .logo-right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.tde-logo, .trading-logo {
-    color: #fff;
+/* Welcome heading */
+.welcome-heading {
+    font-size: 24px;
     font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 10px;
 }
 
 /* Main content */
@@ -91,7 +88,7 @@ html, body {
 .center-logo {
     width: 220px;
     height: 180px; /* Further reduced height to bring text even closer */
-    margin-top: -60px; /* Increased negative margin to remove gap with hero image */
+    margin-top: -20px; /* Reduced negative margin to create more space between hero image and logo */
     position: relative;
     margin-bottom: -25px; /* Increased negative margin to pull text much closer */
 }
@@ -170,8 +167,8 @@ body.loaded .launch-screen {
     transform: scale(0.98);
 }
 
-/* About Us Section */
-.about-section {
+/* About Us Section and Services Section */
+.about-section, .services-section {
     padding: 20px 0 40px;
     background-color: #111;
     border-radius: 15px 15px 0 0;
@@ -245,6 +242,73 @@ body.loaded .launch-screen {
     margin: 0;
 }
 
+/* Services Section Specific Styles */
+.services-section {
+    background-color: #0A0A0A;
+    margin-top: 0;
+    border-radius: 0;
+    padding-top: 30px;
+}
+
+.services-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #F3F4F6;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.service-item {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.service-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.service-details {
+    flex: 1;
+}
+
+.service-details h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #00CC61;
+}
+
+.service-details p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #E0E0E0;
+    margin: 0;
+    text-align: left;
+}
+
 /* Media queries for different screen sizes */
 @media (max-height: 700px) {
     .hero-container {
@@ -258,12 +322,17 @@ body.loaded .launch-screen {
     .center-logo {
         width: 180px;
         height: 140px; /* Further reduced height to bring text even closer */
-        margin-top: -50px; /* Increased negative margin to match main style */
+        margin-top: -15px; /* Reduced negative margin to create more space between hero image and logo */
         margin-bottom: -25px; /* Increased negative margin to pull text much closer */
     }
 
     .title {
         font-size: 36px;
+    }
+
+    .welcome-heading {
+        font-size: 22px;
+        margin-bottom: 12px;
     }
 
     .subtitle {
@@ -290,6 +359,19 @@ body.loaded .launch-screen {
     .feature h3 {
         font-size: 16px;
     }
+
+    .service-details h3 {
+        font-size: 16px;
+    }
+
+    .service-details p {
+        font-size: 13px;
+    }
+
+    .service-icon img {
+        width: 28px;
+        height: 28px;
+    }
 }
 
 @media (max-width: 320px) {
@@ -308,12 +390,17 @@ body.loaded .launch-screen {
     .center-logo {
         width: 160px;
         height: 120px; /* Further reduced height to bring text even closer */
-        margin-top: -45px; /* Increased negative margin to match main style */
+        margin-top: -10px; /* Reduced negative margin to create more space between hero image and logo */
         margin-bottom: -25px; /* Increased negative margin to pull text much closer */
     }
 
     .title {
         font-size: 34px;
+    }
+
+    .welcome-heading {
+        font-size: 20px;
+        margin-bottom: 10px;
     }
 
     .subtitle {
@@ -348,5 +435,24 @@ body.loaded .launch-screen {
 
     .feature p {
         font-size: 13px;
+    }
+
+    .service-details h3 {
+        font-size: 15px;
+    }
+
+    .service-details p {
+        font-size: 12px;
+    }
+
+    .service-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .service-icon img {
+        width: 24px;
+        height: 24px;
     }
 }
