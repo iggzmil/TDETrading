@@ -103,7 +103,39 @@ window.addEventListener('load', function() {
         left: 0,
         behavior: 'auto' // Use 'auto' for immediate scrolling without animation
     });
+
+    // Handle image loading errors
+    handleImageErrors();
 });
+
+// Function to handle image loading errors
+function handleImageErrors() {
+    // Get all images on the page
+    const images = document.querySelectorAll('img');
+
+    // Add error handler to each image
+    images.forEach(img => {
+        img.onerror = function() {
+            console.log('Error loading image:', this.src);
+
+            // Try alternative paths
+            if (this.src.includes('/Mobile/images/')) {
+                // Try without the /Mobile prefix
+                this.src = this.src.replace('/Mobile/images/', 'images/');
+            } else if (this.src.includes('webp')) {
+                // Try JPG instead of WebP
+                this.src = this.src.replace('.webp', '.jpg');
+            }
+
+            // If it's one of our specific images, try a direct path
+            if (this.alt === 'About TDE Trading') {
+                this.src = 'images/about-us-mobile.jpg';
+            } else if (this.alt === 'Our Services') {
+                this.src = 'images/our-service-mobile.jpg';
+            }
+        };
+    });
+}
 
 // Also reset scroll position when navigating through history (back/forward buttons)
 window.addEventListener('pageshow', function(event) {
