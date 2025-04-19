@@ -1,0 +1,114 @@
+/* FAQs Section Styles */
+.faqs-section {
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+.faqs-title {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.faq-item {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 15px 45px 15px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #1A1A1A;
+    border: none;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    display: block;
+}
+
+.faq-question:after {
+    content: '+';
+    font-size: 20px;
+    color: #00CC61;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+
+.faq-question.active:after {
+    content: '-';
+    transform: translateY(-50%);
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    /* Fix for iOS */
+    -webkit-transition: all 0.3s ease;
+    transform: translateY(-10px);
+}
+
+.faq-answer.active {
+    padding: 0 20px 20px;
+    max-height: 1000px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.faq-answer p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #E0E0E0;
+    margin: 0;
+}
+
+/* Animation for FAQs */
+.faq-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.faq-item.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Media queries for FAQs */
+@media (max-width: 375px) {
+    .faq-question {
+        font-size: 14px;
+        padding: 15px 40px 15px 15px;
+    }
+
+    .faq-question:after {
+        right: 15px;
+    }
+
+    .faq-answer {
+        padding: 0 15px;
+        /* Ensure iOS compatibility */
+        -webkit-transform: translateY(-10px);
+    }
+
+    .faq-answer.active {
+        padding: 0 15px 15px;
+        /* Ensure iOS compatibility */
+        -webkit-transform: translateY(0);
+    }
+
+    .faq-answer p {
+        font-size: 13px;
+    }
+}
