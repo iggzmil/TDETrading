@@ -182,6 +182,25 @@ p.title {
     padding: 0 20px;
 }
 
+/* About and Services Images */
+.about-image-container,
+.services-image-container {
+    width: 100%;
+    max-width: 350px;
+    margin: 30px auto 0;
+    text-align: center;
+}
+
+.about-image,
+.services-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* Start invisible for animation */
+    transform: translateY(20px); /* Start below for animation */
+}
+
 /* Feature boxes */
 .feature {
     background-color: #1A1A1A;
@@ -318,6 +337,12 @@ p.title {
         font-size: 15px;
     }
 
+    .about-image-container,
+    .services-image-container {
+        max-width: 300px;
+        margin: 25px auto 0;
+    }
+
     .feature-icon img {
         width: 28px;
         height: 28px;
@@ -368,6 +393,12 @@ p.title {
     .about-text,
     .services-text {
         font-size: 14px;
+    }
+
+    .about-image-container,
+    .services-image-container {
+        max-width: 280px;
+        margin: 20px auto 0;
     }
 
     .feature,

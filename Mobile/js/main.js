@@ -28,10 +28,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add animation to the about title and text
     const aboutTitle = document.querySelector('.about-title');
     const aboutText = document.querySelector('.about-text');
+    const aboutImage = document.querySelector('.about-image');
     setTimeout(() => {
         if (aboutTitle) aboutTitle.classList.add('fade-in');
         if (aboutText) aboutText.classList.add('fade-in');
     }, 600);
+
+    // Add animation to the about image with a slight delay
+    setTimeout(() => {
+        if (aboutImage) {
+            aboutImage.style.opacity = '0';
+            aboutImage.style.transform = 'translateY(20px)';
+            aboutImage.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+
+            // Force a reflow
+            aboutImage.offsetHeight;
+
+            // Apply the animation
+            aboutImage.style.opacity = '1';
+            aboutImage.style.transform = 'translateY(0)';
+        }
+    }, 1000);
 
     // Add animation to features with staggered delay
     const features = document.querySelectorAll('.feature');
@@ -44,10 +61,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add animation to the services title and text
     const servicesTitle = document.querySelector('.services-title');
     const servicesText = document.querySelector('.services-text');
+    const servicesImage = document.querySelector('.services-image');
     setTimeout(() => {
         if (servicesTitle) servicesTitle.classList.add('fade-in');
         if (servicesText) servicesText.classList.add('fade-in');
     }, 1400);
+
+    // Add animation to the services image with a slight delay
+    setTimeout(() => {
+        if (servicesImage) {
+            servicesImage.style.opacity = '0';
+            servicesImage.style.transform = 'translateY(20px)';
+            servicesImage.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+
+            // Force a reflow
+            servicesImage.offsetHeight;
+
+            // Apply the animation
+            servicesImage.style.opacity = '1';
+            servicesImage.style.transform = 'translateY(0)';
+        }
+    }, 2200);
 
     // Add animation to service items with staggered delay
     const serviceItems = document.querySelectorAll('.service-item');
