@@ -65,7 +65,8 @@ class TDEChatWidget {
             <div class="tde-chat-widget">
                 <div class="tde-chat-header">
                     <div class="tde-chat-title">
-                        <div class="title-main">TDE Trading AI Assistant</div>
+                        <div class="title-main">TDE Trading</div>
+                        <div class="title-main">AI Assistant</div>
                         <div class="title-sub">Powered by AAA.City</div>
                     </div>
                     <button class="tde-chat-close-btn">Close Chat</button>
@@ -268,7 +269,7 @@ class TDEChatWidget {
 
     addMessage(text, sender) {
         // Don't add empty messages
-        if (!text || text.trim() === '') return;
+        if (!text || !text.trim()) return;
 
         // Check if this exact message already exists to prevent duplicates
         // This can happen when reopening the chat
@@ -293,19 +294,22 @@ class TDEChatWidget {
         // Store message in memory
         this.messages.push(messageObj);
 
-        // Add to DOM if chat is expanded
-        if (this.chatBody && !this.config.minimized) {
-            const messageElement = document.createElement('div');
-            messageElement.className = `tde-chat-message tde-chat-message-${sender}`;
-            messageElement.textContent = text;
-            this.chatBody.appendChild(messageElement);
+        // Don't add to DOM if minimized
+        if (this.config.minimized) return;
 
-            // Scroll to bottom
-            this.chatBody.scrollTop = this.chatBody.scrollHeight;
+        // Create message element
+        const messageElement = document.createElement('div');
+        messageElement.className = `tde-chat-message tde-chat-message-${sender}`;
+        messageElement.textContent = text;
+        
+        // Add to chat body
+        this.chatBody.appendChild(messageElement);
 
-            // Ensure the widget is visible on screen
-            this.ensureWidgetVisible();
-        }
+        // Scroll to bottom
+        this.chatBody.scrollTop = this.chatBody.scrollHeight;
+
+        // Ensure the widget is visible on screen
+        this.ensureWidgetVisible();
 
         // Save to localStorage (limit to last 50 messages to prevent storage issues)
         if (this.messages.length > 50) {
@@ -317,32 +321,29 @@ class TDEChatWidget {
     }
 
     showTypingIndicator() {
-        if (this.isTyping) return;
-
+        if (this.isTyping || this.config.minimized) return;
         this.isTyping = true;
 
-        const typingElement = document.createElement('div');
-        typingElement.className = 'tde-chat-typing';
-        typingElement.innerHTML = `
+        const typingIndicator = document.createElement('div');
+        typingIndicator.className = 'tde-chat-typing';
+        typingIndicator.innerHTML = `
             <div class="tde-chat-typing-dot"></div>
             <div class="tde-chat-typing-dot"></div>
             <div class="tde-chat-typing-dot"></div>
         `;
-
-        this.chatBody.appendChild(typingElement);
-
-        // Scroll to bottom
+        
+        typingIndicator.id = 'typing-indicator';
+        this.chatBody.appendChild(typingIndicator);
         this.chatBody.scrollTop = this.chatBody.scrollHeight;
     }
 
     hideTypingIndicator() {
         if (!this.isTyping) return;
-
         this.isTyping = false;
-
-        const typingElement = this.chatBody.querySelector('.tde-chat-typing');
-        if (typingElement) {
-            typingElement.remove();
+        
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
         }
     }
 

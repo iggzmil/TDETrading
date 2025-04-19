@@ -1,0 +1,80 @@
+/*
+ * STANDARDIZED HEADING SPACING SYSTEM
+ *
+ * This file ensures consistent spacing above all h2 headings across the site.
+ */
+
+/* Base styling for all section titles */
+h2.section-title,
+h2.about-title,
+h2.services-title, 
+h2.faqs-title, 
+h2.contact-title {
+    margin-top: 40px; /* Consistent top spacing */
+    margin-bottom: 30px;
+}
+
+/* When section titles are inside section-spacing containers */
+.section-spacing h2.section-title,
+.section-spacing h2.about-title,
+.section-spacing h2.services-title,
+.section-spacing h2.faqs-title,
+.section-spacing h2.contact-title {
+    margin-top: 20px; /* Reduced because section-spacing already has padding-top */
+}
+
+/* Ensure all section containers have consistent top padding */
+.section-spacing {
+    padding-top: 30px;
+}
+
+/* Override any inline styles that might be added by JS */
+h2[style*="opacity"],
+h2[style*="transform"] {
+    margin-top: 40px !important; /* Force consistent spacing even with animations */
+}
+
+/* Ensure consistent spacing between CTA buttons and images */
+.services-image,
+.about-image {
+    margin-top: 30px !important; /* Override other styles to ensure consistency */
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+    h2.section-title,
+    h2.about-title,
+    h2.services-title, 
+    h2.faqs-title, 
+    h2.contact-title {
+        margin-top: 35px;
+        margin-bottom: 25px;
+    }
+
+    .section-spacing h2.section-title,
+    .section-spacing h2.about-title,
+    .section-spacing h2.services-title,
+    .section-spacing h2.faqs-title,
+    .section-spacing h2.contact-title {
+        margin-top: 15px;
+    }
+
+    .section-spacing {
+        padding-top: 25px;
+    }
+}
+
+@media (max-width: 320px) {
+    h2.section-title,
+    h2.about-title,
+    h2.services-title, 
+    h2.faqs-title, 
+    h2.contact-title {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    .section-spacing {
+        padding-top: 20px;
+    }
+} 

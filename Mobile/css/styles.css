@@ -342,7 +342,37 @@ body.loaded .launch-screen {
     text-align: left;
 }
 
-/* Media queries for different screen sizes */
+/* Services Image styling */
+.services-image {
+    width: calc(100% - 140px); /* Much more padding on sides */
+    max-width: 180px; /* Significantly reduced max-width for square image */
+    margin: 30px auto;
+    padding: 0;
+}
+
+.services-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Media queries for responsive sizing */
+@media (max-height: 700px) {
+    .services-image {
+        max-width: 160px;
+        margin: 25px auto;
+    }
+}
+
+@media (max-width: 320px) {
+    .services-image {
+        width: calc(100% - 120px);
+        max-width: 140px;
+        margin: 20px auto;
+    }
+}
+
 @media (max-height: 700px) {
     .hero-container {
         margin-bottom: 0; /* Consistent with main style */

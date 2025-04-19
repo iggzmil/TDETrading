@@ -1,0 +1,876 @@
+/*
+ * TDE TRADING MOBILE - MAIN CSS
+ *
+ * A consolidated, standardized CSS system for the TDE Trading mobile website.
+ * This file implements a component-based architecture with standardized variables and consistent patterns.
+ */
+
+/* --------------------
+   1. CSS VARIABLES
+   -------------------- */
+:root {
+  /* Color System */
+  --color-primary: #00CC61;
+  --color-primary-dark: #00B355;
+  --color-primary-light: rgba(0, 204, 97, 0.1);
+  --color-dark: #1A1A1A;
+  --color-dark-secondary: #222222;
+  --color-dark-tertiary: #2A2A2A;
+  --color-light: #F3F4F6;
+  --color-light-secondary: #E0E0E0;
+  --color-text: #FFFFFF;
+  --color-text-secondary: #E0E0E0;
+  --color-error: #ff6b6b;
+  --color-success: #00CC61;
+  
+  /* Typography Scale */
+  --font-size-xxl: 42px;
+  --font-size-xl: 32px;
+  --font-size-lg: 28px;
+  --font-size-md: 18px;
+  --font-size-sm: 16px;
+  --font-size-xs: 14px;
+  --font-size-xxs: 12px;
+  
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  
+  /* Spacing Scale (8pt grid) */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 20px;
+  --space-lg: 30px;
+  --space-xl: 40px;
+  --space-xxl: 60px;
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-round: 50%;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Z-index layers */
+  --z-index-base: 1;
+  --z-index-above: 10;
+  --z-index-modal: 100;
+  --z-index-top: 1000;
+}
+
+/* --------------------
+   2. RESET & BASE STYLES 
+   -------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #000;
+  color: var(--color-text);
+  line-height: 1.5;
+  font-size: 16px;
+  height: auto;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: var(--font-size-xxl);
+}
+
+h2 {
+  font-size: var(--font-size-lg);
+}
+
+h3 {
+  font-size: var(--font-size-md);
+}
+
+p {
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-sm);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* --------------------
+   3. LAYOUT COMPONENTS
+   -------------------- */
+.launch-screen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
+  position: relative;
+  background-color: #000;
+  box-shadow: var(--shadow-md);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 var(--space-md);
+}
+
+.section-spacing {
+  margin-bottom: var(--space-xl);
+  padding-top: var(--space-lg);
+}
+
+/* Ensure consistent spacing for sections with h2 headings */
+.section-spacing h2.section-title {
+  margin-top: var(--space-md); /* Reduced top margin to account for section-spacing padding */
+}
+
+/* Top bar */
+.top-bar {
+  height: 15px;
+  width: 100%;
+  margin-bottom: var(--space-sm);
+}
+
+/* Standardize section bottom spacing */
+.section {
+  margin-bottom: var(--space-xl);
+}
+
+/* --------------------
+   4. TYPOGRAPHY COMPONENTS
+   -------------------- */
+.section-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin: var(--space-xl) 0 var(--space-lg);
+  color: var(--color-text);
+  position: relative;
+  padding-bottom: var(--space-sm);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-medium), transform var(--transition-medium);
+}
+
+/* Ensure all section titles have consistent top spacing */
+.about-title, 
+.services-title, 
+.faqs-title, 
+.contact-title {
+  margin-top: var(--space-xl); /* Consistent 40px top margin for all section titles */
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+
+.section-title.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-text {
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  color: var(--color-light);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-medium), transform var(--transition-medium);
+}
+
+.section-text.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.welcome-heading {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: var(--space-md);
+  margin-top: var(--space-xs);
+}
+
+.title {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xs);
+  color: var(--color-text);
+  text-align: center;
+}
+
+p.title {
+  margin-bottom: var(--space-md);
+}
+
+/* --------------------
+   5. BUTTONS & INTERACTIVE ELEMENTS
+   -------------------- */
+.bottom-button {
+  margin: var(--space-lg) 0 var(--space-xl);
+  width: 100%;
+  text-align: center;
+}
+
+.cta-button, 
+.modern-button,
+.submit-button {
+  width: 100%;
+  height: 52px;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
+  text-align: center;
+}
+
+.cta-button:hover, 
+.modern-button:hover,
+.submit-button:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.cta-button:active, 
+.modern-button:active,
+.submit-button:active {
+  transform: scale(0.98);
+}
+
+/* --------------------
+   6. CARD COMPONENTS
+   -------------------- */
+.modern-card {
+  background-color: var(--color-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.modern-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Feature Cards */
+.feature {
+  background-color: var(--color-dark);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-medium), transform var(--transition-medium);
+}
+
+.feature.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-icon {
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon img {
+  width: 32px;
+  height: 32px;
+}
+
+.feature h3 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xs);
+  color: var(--color-primary);
+}
+
+.feature p {
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  color: var(--color-light-secondary);
+  margin: 0;
+}
+
+/* Service Cards */
+.service-item {
+  background-color: var(--color-dark);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  display: flex;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-medium), transform var(--transition-medium);
+}
+
+.service-item.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-icon {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  margin-right: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-icon img {
+  width: 32px;
+  height: 32px;
+}
+
+.service-details {
+  flex: 1;
+}
+
+.service-details h3 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xs);
+  color: var(--color-primary);
+}
+
+.service-details p {
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  color: var(--color-light-secondary);
+  margin: 0;
+  text-align: left;
+}
+
+/* --------------------
+   7. HERO SECTION
+   -------------------- */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-md) 0;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-medium), transform var(--transition-medium);
+}
+
+.main-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  position: relative;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.center-logo {
+  width: 200px;
+  height: auto;
+  margin: var(--space-lg) auto;
+  display: flex;
+  justify-content: center;
+}
+
+.center-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* --------------------
+   8. IMAGE COMPONENTS
+   -------------------- */
+.services-image,
+.about-image {
+  width: 100%;
+  padding: 0 10px;
+  margin: var(--space-lg) auto var(--space-xl);
+}
+
+.services-image img,
+.about-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  display: block;
+  box-shadow: var(--shadow-md);
+}
+
+/* --------------------
+   9. FAQ COMPONENTS
+   -------------------- */
+.faqs-container {
+  padding: 0 var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.faqs-section {
+  padding: var(--space-md) 0;
+  margin-top: var(--space-md);
+}
+
+.faq-item {
+  background-color: var(--color-dark);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-medium), transform var(--transition-medium);
+}
+
+.faq-item.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-question {
+  padding: var(--space-sm) var(--space-xl) var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  background-color: var(--color-dark);
+  border: none;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  display: block;
+}
+
+.faq-question:after {
+  content: '+';
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+  position: absolute;
+  right: var(--space-md);
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform var(--transition-fast);
+}
+
+.faq-question.active:after {
+  content: '-';
+  transform: translateY(-50%);
+}
+
+.faq-answer {
+  padding: 0 var(--space-md);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-fast);
+  transform: translateY(-10px);
+}
+
+.faq-answer.active {
+  padding: 0 var(--space-md) var(--space-md);
+  max-height: 1000px;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.faq-answer p {
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+  color: var(--color-light-secondary);
+  margin: 0;
+}
+
+/* --------------------
+   10. CONTACT COMPONENTS
+   -------------------- */
+#contact-section {
+  padding: 0 var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.contact-section {
+  margin-top: var(--space-md);
+}
+
+.contact-info-item-link {
+  display: block;
+  margin-bottom: var(--space-lg);
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-info-item {
+  background-color: var(--color-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.contact-info-item:hover {
+  background-color: var(--color-dark-secondary);
+  transform: translateY(-2px);
+}
+
+.contact-info-icon {
+  background-color: var(--color-primary-light);
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-round);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--space-md);
+}
+
+.contact-info-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-info-content h3 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xs);
+  color: var(--color-primary);
+}
+
+.contact-info-content p {
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  color: var(--color-light-secondary);
+  margin: 0;
+}
+
+/* Contact Form */
+.contact-form {
+  background-color: var(--color-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--color-dark-tertiary);
+  border: 1px solid #3A3A3A;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: var(--font-size-xs);
+  transition: border-color var(--transition-fast);
+}
+
+.form-control::placeholder {
+  color: #999;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 204, 97, 0.2);
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+  margin-bottom: var(--space-md);
+}
+
+.invalid-feedback {
+  display: none;
+  color: var(--color-error);
+  font-size: var(--font-size-xxs);
+  margin-top: var(--space-xxs);
+  margin-bottom: var(--space-xs);
+}
+
+.form-control.is-invalid {
+  border-color: var(--color-error);
+}
+
+.form-control.is-invalid + .invalid-feedback {
+  display: block;
+}
+
+/* Form Messages */
+#msgSubmit {
+  display: none;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+}
+
+.alert-success {
+  background-color: rgba(0, 204, 97, 0.2);
+  color: var(--color-success);
+}
+
+.alert-danger {
+  background-color: rgba(255, 107, 107, 0.2);
+  color: var(--color-error);
+}
+
+/* --------------------
+   11. ANIMATION UTILITIES
+   -------------------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* --------------------
+   12. RESPONSIVE STYLES
+   -------------------- */
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+  :root {
+    --space-md: 18px;
+    --space-lg: 28px;
+    --space-xl: 36px;
+  }
+}
+
+/* Small screens (large phones) */
+@media (max-width: 576px) {
+  :root {
+    --font-size-xxl: 38px;
+    --font-size-xl: 30px;
+    --font-size-lg: 24px;
+    --font-size-md: 17px;
+    --font-size-sm: 15px;
+    --font-size-xs: 13px;
+  }
+  
+  /* Adjust spacing for smaller screens */
+  .feature,
+  .service-item,
+  .faq-item {
+    margin-bottom: var(--space-md);
+  }
+  
+  .contact-info-item-link {
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* Extra small screens (small phones) */
+@media (max-width: 375px) {
+  :root {
+    --font-size-xxl: 34px;
+    --font-size-xl: 28px;
+    --font-size-lg: 22px;
+    --font-size-md: 16px;
+    --font-size-sm: 14px;
+    --font-size-xs: 13px;
+    --font-size-xxs: 12px;
+    
+    --space-md: 15px;
+    --space-lg: 25px;
+    --space-xl: 32px;
+  }
+  
+  .container,
+  .section-spacing,
+  .faqs-container,
+  #contact-section {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  .services-image,
+  .about-image {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: var(--space-lg);
+  }
+  
+  .feature,
+  .service-item,
+  .faq-item,
+  .contact-info-item {
+    padding: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  
+  .feature-icon img,
+  .service-icon img {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .service-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: var(--space-sm);
+  }
+  
+  .contact-info-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: var(--space-sm);
+  }
+  
+  .contact-info-icon img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .bottom-button {
+    margin: var(--space-md) 0 var(--space-lg);
+  }
+  
+  .cta-button, 
+  .modern-button,
+  .submit-button {
+    height: 46px;
+    font-size: var(--font-size-sm);
+  }
+  
+  .form-group {
+    margin-bottom: var(--space-sm);
+  }
+  
+  .contact-form {
+    margin-bottom: var(--space-lg);
+  }
+  
+  #msgSubmit {
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+  :root {
+    --font-size-xxl: 32px;
+    --font-size-xl: 26px;
+    --font-size-lg: 20px;
+    --font-size-md: 15px;
+    --font-size-sm: 14px;
+    --font-size-xs: 12px;
+  }
+  
+  .services-image,
+  .about-image {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: var(--space-md);
+  }
+  
+  .feature,
+  .service-item,
+  .faq-item {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+/* Make sure spacing after service CTA buttons is consistent with about CTA buttons */
+.services-cta {
+  margin-bottom: var(--space-lg);
+} 

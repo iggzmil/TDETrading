@@ -1,0 +1,97 @@
+/*
+ * CONSISTENT PADDING SYSTEM
+ *
+ * This file ensures consistent padding across the entire landing page.
+ * It overrides any inconsistent padding values from other stylesheets.
+ */
+
+/* Global container padding */
+.container,
+.section-spacing,
+.faqs-container,
+#contact-section {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Image container padding */
+.services-image,
+.about-image {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Card elements padding */
+.feature,
+.service-item,
+.faq-item,
+.contact-info-item {
+    padding: 20px;
+}
+
+/* Form elements padding */
+.form-control,
+.faq-question {
+    padding: 15px;
+}
+
+.faq-question {
+    padding-right: 45px; /* Extra space for the plus/minus icon */
+}
+
+.faq-answer.active {
+    padding: 0 20px 20px;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 375px) {
+    .container,
+    .section-spacing,
+    .faqs-container,
+    #contact-section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .services-image,
+    .about-image {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .feature,
+    .service-item,
+    .faq-item,
+    .contact-info-item {
+        padding: 15px;
+    }
+    
+    .form-control {
+        padding: 12px 15px;
+    }
+    
+    .faq-question {
+        padding: 15px 40px 15px 15px;
+    }
+    
+    .faq-answer.active {
+        padding: 0 15px 15px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 320px) {
+    .container,
+    .section-spacing,
+    .faqs-container,
+    #contact-section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .services-image,
+    .about-image {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+} 
