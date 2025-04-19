@@ -1,0 +1,410 @@
+/*
+ * FIXED STYLES
+ *
+ * Combined styling with proper spacing and all necessary visual elements
+ */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    color: #fff;
+    height: auto;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Launch screen container */
+.launch-screen {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #000;
+    box-shadow: 0 3px 6px rgba(18, 15, 40, 0.12);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+}
+
+/* Top bar */
+.top-bar {
+    height: 15px;
+    width: 100%;
+}
+
+/* Welcome heading */
+.welcome-heading {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+/* Main content */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Hero container with image and logo */
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.center-logo {
+    width: 200px;
+    height: auto;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.center-logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+p.title {
+    margin-bottom: 20px;
+}
+
+/* Bottom button */
+.bottom-button {
+    margin: 30px 0 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.cta-button {
+    width: 100%;
+    height: 52px;
+    background-color: #00CC61;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+    background-color: #00B355;
+}
+
+.cta-button:active {
+    transform: scale(0.98);
+}
+
+/* Section titles */
+.section-title,
+.about-title,
+.services-title,
+.faqs-title,
+.contact-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 40px 0 30px;
+    color: #fff;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Section text */
+.section-text,
+.about-text,
+.services-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #F3F4F6;
+    margin-bottom: 30px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Section containers */
+.faqs-container,
+#contact-section {
+    padding: 0 20px;
+}
+
+/* Feature boxes */
+.feature {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.feature-icon {
+    font-size: 28px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.feature h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #00CC61;
+}
+
+.feature p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #E0E0E0;
+    margin: 0;
+}
+
+/* Service items */
+.service-item {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.service-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.service-details {
+    flex: 1;
+}
+
+.service-details h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #00CC61;
+}
+
+.service-details p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #E0E0E0;
+    margin: 0;
+    text-align: left;
+}
+
+/* Animations */
+.main-content.fade-in,
+.about-title.fade-in,
+.about-text.fade-in,
+.services-title.fade-in,
+.services-text.fade-in,
+.feature.fade-in,
+.service-item.fade-in,
+.faqs-title.fade-in,
+.contact-title.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Media queries */
+@media (max-height: 700px) {
+    .hero-image {
+        max-width: 250px;
+    }
+
+    .center-logo {
+        width: 180px;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+
+    .welcome-heading {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .section-title,
+    .about-title,
+    .services-title,
+    .faqs-title,
+    .contact-title {
+        font-size: 24px;
+    }
+
+    .section-text,
+    .about-text,
+    .services-text {
+        font-size: 15px;
+    }
+
+    .feature-icon img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .feature h3,
+    .service-details h3 {
+        font-size: 16px;
+    }
+
+    .service-details p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 320px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero-image {
+        max-width: 220px;
+    }
+
+    .center-logo {
+        width: 160px;
+    }
+
+    .title {
+        font-size: 34px;
+    }
+
+    .welcome-heading {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .section-title,
+    .about-title,
+    .services-title,
+    .faqs-title,
+    .contact-title {
+        font-size: 22px;
+        margin: 30px 0 15px;
+    }
+
+    .section-text,
+    .about-text,
+    .services-text {
+        font-size: 14px;
+    }
+
+    .feature,
+    .service-item {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .feature h3,
+    .service-details h3 {
+        font-size: 15px;
+    }
+
+    .feature p {
+        font-size: 13px;
+    }
+
+    .service-details p {
+        font-size: 12px;
+    }
+
+    .service-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+    }
+
+    .service-icon img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .bottom-button {
+        margin: 25px 0;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+    }
+}
