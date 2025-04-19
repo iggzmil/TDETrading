@@ -1,0 +1,37 @@
+/*
+ * TDE Website Main CSS
+ *
+ * CSS LOADING ORDER:
+ * This file imports all CSS files in a specific order to ensure proper cascading.
+ * The order is important as later files will override earlier ones when selectors have equal specificity.
+ *
+ * 1. Bootstrap CSS (base framework)
+ * 2. Component-specific CSS (animations, popups, navigation, etc.)
+ * 3. Custom CSS (main site styles)
+ */
+
+/* Bootstrap Css */
+@import "./bootstrap.min.css";
+
+/* Animations Css */
+@import "./animations.css";
+
+/* Magnific Popup Core Css File */
+@import "./magnific-popup.css";
+
+/* SlickNav Css removed - desktop-only site */
+
+/* Swiper Css */
+@import "./swiper-bundle.min.css";
+
+/* Mouse Cursor Css File */
+@import "./mousecursor.css";
+
+/* Font Awesome Icon Css*/
+@import "./all.min.css";
+
+/* Custom Css */
+@import "./custom.css";
+
+/* No responsive styles - desktop only */
+

@@ -1,0 +1,220 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    color: #fff;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Launch screen container */
+.launch-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #000;
+    box-shadow: 0 3px 6px rgba(18, 15, 40, 0.12);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 20px;
+}
+
+/* Top logos */
+.top-logos {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2px;
+    height: 25px;
+}
+
+.logo-left, .logo-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tde-logo, .trading-logo {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 0 10px;
+}
+
+/* Hero container with image and logo */
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.center-logo {
+    width: 220px;
+    height: 220px;
+    margin-top: -20px; /* Negative margin to overlap with the hero image */
+    position: relative;
+}
+
+.center-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.subtitle {
+    font-size: 18px;
+    line-height: 1.4;
+    max-width: 300px;
+    margin: 0 auto;
+    color: #F3F4F6;
+}
+
+/* Bottom button */
+.bottom-button {
+    padding: 20px 0 48px;
+}
+
+.cta-button {
+    width: 100%;
+    height: 52px;
+    background-color: #00CC61;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #00B355;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body.loaded .launch-screen {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.main-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.main-content.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cta-button {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:active {
+    transform: scale(0.98);
+}
+
+/* Media queries for different screen sizes */
+@media (max-height: 700px) {
+    .hero-container {
+        margin-bottom: 10px;
+    }
+
+    .hero-image {
+        max-width: 250px;
+    }
+
+    .center-logo {
+        width: 180px;
+        height: 180px;
+        margin-top: -20px;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 320px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero-container {
+        margin-bottom: 8px;
+    }
+
+    .hero-image {
+        max-width: 220px;
+    }
+
+    .center-logo {
+        width: 160px;
+        height: 160px;
+        margin-top: -20px;
+    }
+
+    .title {
+        font-size: 34px;
+    }
+
+    .subtitle {
+        font-size: 15px;
+        max-width: 280px;
+    }
+}
