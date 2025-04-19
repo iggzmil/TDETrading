@@ -5,33 +5,35 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     font-family: 'Roboto', sans-serif;
     background-color: #000;
     color: #fff;
-    height: 100vh;
+    height: auto;
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* Launch screen container */
 .launch-screen {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     width: 100%;
     max-width: 390px;
     margin: 0 auto;
     position: relative;
     background-color: #000;
     box-shadow: 0 3px 6px rgba(18, 15, 40, 0.12);
+    /* Removed min-height to allow natural content flow */
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    width: 100%;
     padding: 0 20px;
+    /* Removed fixed height to allow content to determine height */
 }
 
 /* Top logos */
@@ -55,13 +57,13 @@ body {
 
 /* Main content */
 .main-content {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0 0 10px;
+    padding: 20px 0; /* Added vertical padding */
+    /* Removed flex: 1 which was causing the element to take all available space */
 }
 
 /* Hero container with image and logo */
@@ -69,7 +71,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 0; /* Removed margin to eliminate gap with text */
     position: relative;
 }
 
@@ -88,9 +90,10 @@ body {
 
 .center-logo {
     width: 220px;
-    height: 220px;
-    margin-top: -20px; /* Negative margin to overlap with the hero image */
+    height: 180px; /* Further reduced height to bring text even closer */
+    margin-top: -60px; /* Increased negative margin to remove gap with hero image */
     position: relative;
+    margin-bottom: -25px; /* Increased negative margin to pull text much closer */
 }
 
 .center-logo img {
@@ -103,6 +106,7 @@ body {
     font-size: 42px;
     font-weight: 700;
     margin-bottom: 8px;
+    margin-top: 0; /* Ensure no top margin */
     color: #fff;
 }
 
@@ -116,7 +120,8 @@ body {
 
 /* Bottom button */
 .bottom-button {
-    padding: 20px 0 48px;
+    padding: 20px 0 20px;
+    width: 100%;
 }
 
 .cta-button {
@@ -152,7 +157,7 @@ body.loaded .launch-screen {
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.main-content.fade-in {
+.main-content.fade-in, .about-section.fade-in, .feature.fade-in {
     opacity: 1;
     transform: translateY(0);
 }
@@ -165,10 +170,85 @@ body.loaded .launch-screen {
     transform: scale(0.98);
 }
 
+/* About Us Section */
+.about-section {
+    padding: 20px 0 40px;
+    background-color: #111;
+    border-radius: 15px 15px 0 0;
+    margin-top: 10px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+    text-align: center;
+}
+
+.about-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #F3F4F6;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.feature {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.feature-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.feature h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #00CC61;
+}
+
+.feature p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #E0E0E0;
+    margin: 0;
+}
+
 /* Media queries for different screen sizes */
 @media (max-height: 700px) {
     .hero-container {
-        margin-bottom: 10px;
+        margin-bottom: 0; /* Consistent with main style */
     }
 
     .hero-image {
@@ -177,8 +257,9 @@ body.loaded .launch-screen {
 
     .center-logo {
         width: 180px;
-        height: 180px;
-        margin-top: -20px;
+        height: 140px; /* Further reduced height to bring text even closer */
+        margin-top: -50px; /* Increased negative margin to match main style */
+        margin-bottom: -25px; /* Increased negative margin to pull text much closer */
     }
 
     .title {
@@ -186,6 +267,27 @@ body.loaded .launch-screen {
     }
 
     .subtitle {
+        font-size: 16px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .about-content p {
+        font-size: 15px;
+    }
+
+    .feature-icon {
+        font-size: 24px;
+    }
+
+    .feature-icon img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .feature h3 {
         font-size: 16px;
     }
 }
@@ -196,7 +298,7 @@ body.loaded .launch-screen {
     }
 
     .hero-container {
-        margin-bottom: 8px;
+        margin-bottom: 0; /* Consistent with main style */
     }
 
     .hero-image {
@@ -205,8 +307,9 @@ body.loaded .launch-screen {
 
     .center-logo {
         width: 160px;
-        height: 160px;
-        margin-top: -20px;
+        height: 120px; /* Further reduced height to bring text even closer */
+        margin-top: -45px; /* Increased negative margin to match main style */
+        margin-bottom: -25px; /* Increased negative margin to pull text much closer */
     }
 
     .title {
@@ -216,5 +319,34 @@ body.loaded .launch-screen {
     .subtitle {
         font-size: 15px;
         max-width: 280px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .about-content p {
+        font-size: 14px;
+    }
+
+    .feature {
+        padding: 12px;
+    }
+
+    .feature-icon {
+        font-size: 22px;
+    }
+
+    .feature-icon img {
+        width: 26px;
+        height: 26px;
+    }
+
+    .feature h3 {
+        font-size: 15px;
+    }
+
+    .feature p {
+        font-size: 13px;
     }
 }

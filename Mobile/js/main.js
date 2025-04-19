@@ -2,19 +2,32 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Get the CTA button
     const ctaButton = document.querySelector('.cta-button');
-    
+
     // Add click event listener to the button
     ctaButton.addEventListener('click', function() {
-        // Redirect to the main app or registration page
-        // This can be updated with the actual URL when available
-        window.location.href = 'registration.html';
+        // Show an alert instead of redirecting
+        alert('Thank you for your interest! This feature will be available soon.');
     });
-    
+
     // Add animation to the main content
     const mainContent = document.querySelector('.main-content');
     setTimeout(() => {
         mainContent.classList.add('fade-in');
     }, 300);
+
+    // Add animation to the about section
+    const aboutSection = document.querySelector('.about-section');
+    setTimeout(() => {
+        aboutSection.classList.add('fade-in');
+    }, 600);
+
+    // Add animation to features with staggered delay
+    const features = document.querySelectorAll('.feature');
+    features.forEach((feature, index) => {
+        setTimeout(() => {
+            feature.classList.add('fade-in');
+        }, 800 + (index * 200)); // Staggered delay for each feature
+    });
 });
 
 // Add a simple fade-in animation when the page loads
