@@ -36,8 +36,8 @@
     padding: 20px;
     display: flex;
     align-items: center;
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 1; /* Changed from 0 to 1 to ensure visibility */
+    transform: translateY(0); /* Changed from 20px to 0 to ensure proper positioning */
     transition: opacity 0.6s ease, transform 0.6s ease, background-color 0.3s ease;
 }
 
@@ -206,10 +206,20 @@ textarea.form-control {
 }
 
 /* Animation for Contact Items */
-.contact-info-item.fade-in,
 .contact-form.fade-in {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Special animation class for contact items if needed */
+.contact-info-item.animate {
+    animation: contactItemPulse 0.5s ease;
+}
+
+@keyframes contactItemPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 /* Media queries */
