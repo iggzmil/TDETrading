@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="scroll-restoration" content="manual">
     <title>TDE Trading - Mobile</title>
     <link rel="stylesheet" href="css/fixed-styles.css">
     <link rel="stylesheet" href="css/faqs.css">
@@ -321,6 +322,19 @@
     </div>
 
     <script src="js/main.js"></script>
+
+    <!-- Ensure page loads at the top -->
+    <script>
+        // Force scroll to top on page refresh
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual'; // Prevent browser from restoring scroll position
+        }
+
+        // Immediate scroll to top (no animation)
+        window.onbeforeunload = function() {
+            window.scrollTo(0, 0);
+        };
+    </script>
     <script src="js/faqs.js"></script>
     <script src="js/contact.js"></script>
     <!-- EmailJS SDK -->

@@ -58,7 +58,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Add a simple fade-in animation when the page loads
+// Add a simple fade-in animation when the page loads and scroll to top
 window.addEventListener('load', function() {
+    // Add loaded class for animations
     document.body.classList.add('loaded');
+
+    // Scroll to the top of the page
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'auto' // Use 'auto' for immediate scrolling without animation
+    });
+});
+
+// Also reset scroll position when navigating through history (back/forward buttons)
+window.addEventListener('pageshow', function(event) {
+    // Check if the page is loaded from cache (back/forward navigation)
+    if (event.persisted) {
+        // Scroll to top immediately
+        window.scrollTo(0, 0);
+    }
 });
