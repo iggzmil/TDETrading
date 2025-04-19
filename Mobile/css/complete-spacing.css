@@ -90,8 +90,13 @@ p.title {
     margin-bottom: 8px; /* xs */
 }
 
-/* About CTA button */
+/* CTA buttons */
 .about-cta {
+    margin-bottom: 32px; /* lg */
+}
+
+.services-cta {
+    margin-top: 24px; /* md */
     margin-bottom: 32px; /* lg */
 }
 

@@ -1,0 +1,117 @@
+/* 
+ * CONSISTENT SPACING SYSTEM
+ * 
+ * This file implements a systematic spacing approach:
+ * - xs: 8px  (very small gaps)
+ * - sm: 16px (small elements spacing)
+ * - md: 24px (medium spacing between related elements)
+ * - lg: 32px (large spacing between sections)
+ * - xl: 48px (extra large spacing for major sections)
+ */
+
+/* ===== GLOBAL RESET ===== */
+/* First, reset all margins to ensure consistency */
+h1, h2, h3, h4, h5, h6, p, div {
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== SECTION SPACING ===== */
+/* Major section spacing */
+.main-content {
+    margin-bottom: 32px; /* lg */
+}
+
+/* Space between main sections */
+.about-title {
+    margin-top: 32px; /* lg */
+}
+
+.services-title {
+    margin-top: 32px; /* lg */
+}
+
+.about-cta {
+    margin-bottom: 32px; /* lg */
+}
+
+/* ===== CONTENT SPACING ===== */
+/* Section titles */
+.section-title,
+.about-title,
+.services-title {
+    margin-bottom: 16px; /* sm */
+}
+
+/* Section text */
+.section-text,
+.about-text,
+.services-text {
+    margin-left: 16px; /* sm */
+    margin-right: 16px; /* sm */
+    margin-bottom: 24px; /* md */
+}
+
+/* Feature boxes and service items */
+.feature,
+.service-item {
+    margin-left: 16px; /* sm */
+    margin-right: 16px; /* sm */
+    margin-bottom: 16px; /* sm */
+    padding: 16px; /* sm */
+}
+
+/* Last items in a group */
+.feature:last-of-type {
+    margin-bottom: 24px; /* md */
+}
+
+.service-item:last-of-type {
+    margin-bottom: 32px; /* lg */
+}
+
+/* ===== INTERNAL ELEMENT SPACING ===== */
+/* Icons in features and services */
+.feature-icon,
+.service-icon {
+    margin-bottom: 8px; /* xs */
+}
+
+.service-icon {
+    margin-right: 16px; /* sm */
+}
+
+/* Headings in features and services */
+.feature h3,
+.service-details h3 {
+    margin-bottom: 8px; /* xs */
+}
+
+/* ===== BUTTON SPACING ===== */
+.bottom-button {
+    padding: 16px 0; /* sm */
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 320px) {
+    /* Slightly reduce spacing on very small screens */
+    .section-title,
+    .about-title,
+    .services-title {
+        margin-bottom: 12px;
+    }
+    
+    .section-text,
+    .about-text,
+    .services-text,
+    .feature,
+    .service-item {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+    
+    .feature,
+    .service-item {
+        padding: 12px;
+    }
+}

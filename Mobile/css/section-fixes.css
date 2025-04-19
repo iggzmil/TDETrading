@@ -1,0 +1,29 @@
+/* Section fixes */
+.about-section {
+    padding: 20px 20px 20px;
+    background-color: #111;
+    border-radius: 15px;
+    margin: 10px 0 20px 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.services-section {
+    padding: 20px 20px 40px;
+    background-color: #0A0A0A;
+    border-radius: 15px 15px 0 0;
+    margin-top: 20px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Bottom button inside sections */
+.about-section .bottom-button {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}

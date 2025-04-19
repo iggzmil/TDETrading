@@ -1,0 +1,109 @@
+/*
+ * STANDARDIZED PADDING SYSTEM
+ *
+ * This file ensures consistent padding across all elements:
+ * - xs: 8px  (very small gaps)
+ * - sm: 16px (small elements spacing)
+ * - md: 24px (medium spacing between related elements)
+ * - lg: 32px (large spacing between sections)
+ * - xl: 48px (extra large spacing for major sections)
+ */
+
+/* ===== SECTION TITLES ===== */
+.section-title,
+.about-title,
+.services-title {
+    margin-top: 32px; /* lg - consistent spacing between sections */
+    margin-bottom: 16px; /* sm */
+    text-align: center;
+}
+
+/* ===== SECTION TEXT ===== */
+.section-text,
+.about-text,
+.services-text {
+    margin: 0 16px 24px; /* sm horizontal, md bottom */
+    text-align: center;
+}
+
+/* ===== FEATURE BOXES ===== */
+.feature {
+    margin: 0 16px 16px; /* sm */
+    padding: 16px; /* sm */
+    border-radius: 10px;
+}
+
+.feature:last-of-type {
+    margin-bottom: 24px; /* md */
+}
+
+/* Feature internals */
+.feature-icon {
+    margin-bottom: 8px; /* xs */
+}
+
+.feature h3 {
+    margin-bottom: 8px; /* xs */
+}
+
+/* ===== SERVICE ITEMS ===== */
+.service-item {
+    margin: 0 16px 16px; /* sm */
+    padding: 16px; /* sm */
+    border-radius: 10px;
+}
+
+.service-item:last-of-type {
+    margin-bottom: 24px; /* md */
+}
+
+/* Service item internals */
+.service-icon {
+    margin-right: 16px; /* sm */
+}
+
+.service-details h3 {
+    margin-bottom: 8px; /* xs */
+}
+
+/* ===== CTA BUTTONS ===== */
+.bottom-button {
+    margin: 0 16px 32px; /* sm horizontal, lg bottom */
+    padding: 16px 0; /* sm vertical */
+    text-align: center;
+}
+
+.about-cta {
+    margin-bottom: 32px; /* lg */
+}
+
+.services-cta {
+    margin-top: 24px; /* md */
+    margin-bottom: 32px; /* lg */
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 320px) {
+    /* Slightly reduce spacing on very small screens */
+    .section-title,
+    .about-title,
+    .services-title,
+    .section-text,
+    .about-text,
+    .services-text,
+    .feature,
+    .service-item,
+    .bottom-button {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+    
+    .feature,
+    .service-item {
+        padding: 12px;
+    }
+    
+    .service-icon {
+        margin-right: 12px;
+    }
+}

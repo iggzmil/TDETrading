@@ -1,0 +1,59 @@
+/* Consistent spacing across the landing page */
+
+/* About Us section spacing */
+.about-title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.about-text {
+    margin: 0 20px 25px;
+}
+
+.feature {
+    margin: 0 20px 15px;
+}
+
+.about-cta {
+    margin-bottom: 30px;
+}
+
+/* Services section spacing */
+.services-title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.services-text {
+    margin: 0 20px 25px;
+}
+
+.service-item {
+    margin: 0 20px 15px;
+}
+
+/* Last service item needs extra margin */
+.service-item:last-child {
+    margin-bottom: 30px;
+}
+
+/* Media queries */
+@media (max-width: 320px) {
+    .about-title,
+    .services-title {
+        margin-top: 25px;
+    }
+    
+    .about-text,
+    .services-text,
+    .feature,
+    .service-item {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    
+    .about-cta,
+    .service-item:last-child {
+        margin-bottom: 25px;
+    }
+}

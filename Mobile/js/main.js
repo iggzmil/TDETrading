@@ -104,64 +104,10 @@ window.addEventListener('load', function() {
         behavior: 'auto' // Use 'auto' for immediate scrolling without animation
     });
 
-    // Handle image loading errors
-    handleImageErrors();
+
 });
 
-// Function to handle image loading errors
-function handleImageErrors() {
-    // Get all images on the page
-    const images = document.querySelectorAll('img');
 
-    // Add error handler to each image
-    images.forEach(img => {
-        // Set a successful load handler
-        img.onload = function() {
-            console.log('Image loaded successfully:', this.src);
-
-            // If this is one of our section images, show it and hide the fallback
-            if (this.alt === 'About TDE Trading' || this.alt === 'Our Services') {
-                // Make the image visible with animation
-                this.style.opacity = '1';
-                this.style.transform = 'translateY(0)';
-
-                // Try to find and hide the fallback
-                const container = this.closest('.about-image-container, .services-image-container');
-                if (container) {
-                    const fallback = container.querySelector('.fallback-image');
-                    if (fallback) {
-                        fallback.style.display = 'none';
-                    }
-                }
-            }
-        };
-
-        // Set an error handler
-        img.onerror = function() {
-            console.log('Error loading image:', this.src);
-
-            // Try the logo as a last resort for section images
-            if (this.alt === 'About TDE Trading' || this.alt === 'Our Services') {
-                if (!this.src.includes('TDE-Trading-logo.png')) {
-                    console.log('Trying logo image as fallback');
-                    this.src = 'images/TDE-Trading-logo.png';
-                } else {
-                    // If even the logo fails, hide the image and show the fallback
-                    this.style.display = 'none';
-
-                    // Find and show the fallback
-                    const container = this.closest('.about-image-container, .services-image-container');
-                    if (container) {
-                        const fallback = container.querySelector('.fallback-image');
-                        if (fallback) {
-                            fallback.style.display = 'flex';
-                        }
-                    }
-                }
-            }
-        };
-    });
-}
 
 // Also reset scroll position when navigating through history (back/forward buttons)
 window.addEventListener('pageshow', function(event) {

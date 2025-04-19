@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDE Trading - Mobile</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="launch-screen">
+        <div class="container">
+            <!-- Top bar -->
+            <div class="top-bar">
+                <!-- Empty top bar -->
+            </div>
+
+            <!-- Main content -->
+            <div class="main-content">
+                <!-- Welcome heading -->
+                <h1 class="welcome-heading">Welcome to TDE Trading!</h1>
+
+                <!-- Combined hero image and logo -->
+                <div class="hero-container">
+                    <div class="hero-image">
+                        <img src="images/hero-img.webp" alt="TDE Trading Hero Image">
+                    </div>
+                    <div class="center-logo">
+                        <img src="images/TDE-Trading-logo.png" alt="TDE Trading Logo">
+                    </div>
+                </div>
+
+                <!-- Text content -->
+                <h1 class="title">Your Edge</h1>
+                <p class="title">Starts Here!</p>
+            </div>
+
+            <!-- Bottom button -->
+            <div class="bottom-button">
+                <button class="cta-button">Contact Us</button>
+            </div>
+
+            <!-- About Us Section -->
+            <div class="about-section">
+                <h2 class="section-title">About Us</h2>
+                <div class="about-content">
+                    <p>At TDE Trading we help you design a trading approach that fits your lifestyle. Whether you're navigating Forex, Crypto, Commodities, or Indices, we guide you in building a personalised strategy that adapts across markets and aligns with your schedule.</p>
+                
+                    <div class="about-features">
+                        <div class="feature">
+                            <div class="feature-icon"><img src="images/mission.svg" alt="Mission Icon"></div>
+                            <h3>Our Mission</h3>
+                            <p>We aim to transform trading education by cutting through complexity.</p>
+                        </div>
+
+                        <div class="feature">
+                            <div class="feature-icon"><img src="images/vision.svg" alt="Vision Icon"></div>
+                            <h3>Our Vision</h3>
+                            <p>Learn with structure. Improve with consistency. Succeed with support.</p>
+                        </div>
+
+                        <div class="feature">
+                            <div class="feature-icon"><img src="images/ideas.svg" alt="Values Icon"></div>
+                            <h3>Our Values</h3>
+                            <p>It's not about being perfect — it's about showing up with purpose, every day.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom button -->
+                <div class="bottom-button">
+                    <button class="cta-button">Contact Us</button>
+                </div>
+            </div>
+
+            <!-- Our Services Section -->
+            <div class="services-section">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-content">
+                    <p>We offer a range of trading education services designed to help you develop the skills and confidence needed for consistent trading success.</p>
+
+                    <div class="services-list">
+                        <div class="service-item">
+                            <div class="service-icon"><img src="images/education.svg" alt="Education Icon"></div>
+                            <div class="service-details">
+                                <h3>Trading Education</h3>
+                                <p>Comprehensive courses covering Smart Money Concepts, price action, and risk management.</p>
+                            </div>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="service-icon"><img src="images/training.svg" alt="Mentorship Icon"></div>
+                            <div class="service-details">
+                                <h3>1-on-1 Mentorship</h3>
+                                <p>Personalized guidance to accelerate your trading journey with direct feedback.</p>
+                            </div>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="service-icon"><img src="images/guide.svg" alt="Analysis Icon"></div>
+                            <div class="service-details">
+                                <h3>Market Analysis</h3>
+                                <p>Regular market breakdowns and trade setups to develop your analytical skills.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

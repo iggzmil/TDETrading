@@ -1,0 +1,141 @@
+/* 
+ * CLEAN SPACING SYSTEM
+ * 
+ * A simplified, consistent spacing approach for the entire site
+ */
+
+/* Reset all margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container padding */
+.container {
+    padding: 0 20px;
+}
+
+/* Main content section */
+.main-content {
+    padding: 20px 0;
+}
+
+/* Welcome heading */
+.welcome-heading {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Hero container */
+.hero-container {
+    margin-bottom: 20px;
+}
+
+/* Hero image */
+.hero-image {
+    margin-bottom: 20px;
+}
+
+/* Title text */
+.title {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+p.title {
+    margin-bottom: 20px;
+}
+
+/* Logo */
+.center-logo {
+    margin: 20px auto;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+/* CTA Buttons */
+.bottom-button {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.cta-button {
+    padding: 15px 30px;
+}
+
+/* Section titles */
+.section-title,
+.about-title,
+.services-title {
+    margin: 40px 0 20px;
+    text-align: center;
+}
+
+/* Section text */
+.section-text,
+.about-text,
+.services-text {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Feature boxes */
+.feature {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Feature internals */
+.feature-icon {
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    margin-bottom: 10px;
+}
+
+/* Service items */
+.service-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Service item internals */
+.service-icon {
+    margin-right: 20px;
+}
+
+.service-details h3 {
+    margin-bottom: 10px;
+}
+
+/* Media queries */
+@media (max-width: 320px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section-title,
+    .about-title,
+    .services-title {
+        margin: 30px 0 15px;
+    }
+    
+    .feature,
+    .service-item {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .bottom-button {
+        margin: 25px 0;
+    }
+    
+    .cta-button {
+        padding: 12px 25px;
+    }
+}

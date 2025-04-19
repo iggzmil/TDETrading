@@ -1,0 +1,491 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    color: #fff;
+    height: auto;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Launch screen container */
+.launch-screen {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #000;
+    box-shadow: 0 3px 6px rgba(18, 15, 40, 0.12);
+    /* Removed min-height to allow natural content flow */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+    /* Removed fixed height to allow content to determine height */
+}
+
+/* Top bar */
+.top-bar {
+    height: 15px;
+    width: 100%;
+}
+
+/* Welcome heading */
+.welcome-heading {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+/* Main content */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0; /* Added vertical padding */
+    /* Removed flex: 1 which was causing the element to take all available space */
+}
+
+/* Hero container with image and logo */
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0; /* Removed margin to eliminate gap with text */
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.center-logo {
+    width: 220px;
+    height: 180px; /* Further reduced height to bring text even closer */
+    margin-top: -20px; /* Reduced negative margin to create more space between hero image and logo */
+    position: relative;
+    margin-bottom: -25px; /* Increased negative margin to pull text much closer */
+}
+
+.center-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-top: 0; /* Ensure no top margin */
+    color: #fff;
+}
+
+.subtitle {
+    font-size: 18px;
+    line-height: 1.4;
+    max-width: 300px;
+    margin: 0 auto;
+    color: #F3F4F6;
+}
+
+/* Bottom button */
+.bottom-button {
+    padding: 20px 0 20px;
+    width: 100%;
+}
+
+.cta-button {
+    width: 100%;
+    height: 52px;
+    background-color: #00CC61;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #00B355;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body.loaded .launch-screen {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.main-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.main-content.fade-in, .about-section.fade-in, .about-content.fade-in, .services-section.fade-in, .services-content.fade-in, .feature.fade-in, .service-item.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cta-button {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:active {
+    transform: scale(0.98);
+}
+
+/* About Title and Text */
+.about-title {
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* About Section */
+.about-section {
+    padding: 20px 0 40px;
+    background-color: #111;
+    border-radius: 15px 15px 0 0;
+    margin-top: 10px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Services Section */
+.services-section {
+    padding: 20px 0 40px;
+    background-color: #111;
+    border-radius: 15px 15px 0 0;
+    margin-top: 10px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+    text-align: center;
+}
+
+.about-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #F3F4F6;
+    margin-bottom: 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.about-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.feature {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    margin: 0 20px;
+}
+
+.feature-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.feature h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #00CC61;
+}
+
+.feature p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #E0E0E0;
+    margin: 0;
+}
+
+/* Services Section Specific Styles */
+.services-section {
+    background-color: #0A0A0A;
+    margin-top: 0;
+    border-radius: 0;
+    padding-top: 30px;
+}
+
+.about-content, .services-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.services-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #F3F4F6;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.service-item {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.service-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.service-details {
+    flex: 1;
+}
+
+.service-details h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #00CC61;
+}
+
+.service-details p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #E0E0E0;
+    margin: 0;
+    text-align: left;
+}
+
+/* Media queries for different screen sizes */
+@media (max-height: 700px) {
+    .hero-container {
+        margin-bottom: 0; /* Consistent with main style */
+    }
+
+    .hero-image {
+        max-width: 250px;
+    }
+
+    .center-logo {
+        width: 180px;
+        height: 140px; /* Further reduced height to bring text even closer */
+        margin-top: -15px; /* Reduced negative margin to create more space between hero image and logo */
+        margin-bottom: -25px; /* Increased negative margin to pull text much closer */
+    }
+
+    .title {
+        font-size: 36px;
+    }
+
+    .welcome-heading {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .about-text {
+        font-size: 15px;
+    }
+
+    .feature-icon {
+        font-size: 24px;
+    }
+
+    .feature-icon img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .feature h3 {
+        font-size: 16px;
+    }
+
+    .service-details h3 {
+        font-size: 16px;
+    }
+
+    .service-details p {
+        font-size: 13px;
+    }
+
+    .service-icon img {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 320px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero-container {
+        margin-bottom: 0; /* Consistent with main style */
+    }
+
+    .hero-image {
+        max-width: 220px;
+    }
+
+    .center-logo {
+        width: 160px;
+        height: 120px; /* Further reduced height to bring text even closer */
+        margin-top: -10px; /* Reduced negative margin to create more space between hero image and logo */
+        margin-bottom: -25px; /* Increased negative margin to pull text much closer */
+    }
+
+    .title {
+        font-size: 34px;
+    }
+
+    .welcome-heading {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        font-size: 15px;
+        max-width: 280px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .about-text {
+        font-size: 14px;
+    }
+
+    .feature {
+        padding: 12px;
+    }
+
+    .feature-icon {
+        font-size: 22px;
+    }
+
+    .feature-icon img {
+        width: 26px;
+        height: 26px;
+    }
+
+    .feature h3 {
+        font-size: 15px;
+    }
+
+    .feature p {
+        font-size: 13px;
+    }
+
+    .service-details h3 {
+        font-size: 15px;
+    }
+
+    .service-details p {
+        font-size: 12px;
+    }
+
+    .service-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .service-icon img {
+        width: 24px;
+        height: 24px;
+    }
+}

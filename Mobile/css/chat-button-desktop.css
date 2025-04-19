@@ -1,0 +1,81 @@
+/**
+ * TDE Trading Chat Button - Desktop Style
+ * Matches the button style from the desktop contact page
+ */
+
+/* Desktop-style button */
+.tde-chat-minimized {
+  position: relative;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1em;
+  text-transform: capitalize;
+  background: #00CC61; /* var(--accent-color) */
+  color: #fff; /* var(--white-color) */
+  border-radius: 100px;
+  padding: 18px 70px 18px 30px;
+  border: none;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.tde-chat-minimized:hover {
+  background-color: transparent;
+}
+
+.tde-chat-minimized::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background: #120F28; /* var(--primary-color) */
+  border-radius: 100px;
+  transition: all 0.4s ease-in-out;
+  z-index: -1;
+}
+
+.tde-chat-minimized:hover::before {
+  width: 100%;
+  left: 0;
+  right: auto;
+}
+
+.tde-chat-minimized::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background-image: url('../images/arrow-white.svg');
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: cover;
+  transform: translate(-30px, -50%);
+  transition: all 0.4s ease-in-out;
+}
+
+/* Media queries */
+@media (max-width: 375px) {
+  .tde-chat-minimized {
+    font-size: 16px;
+    padding: 16px 60px 16px 25px;
+  }
+  
+  .tde-chat-minimized::after {
+    width: 25px;
+    height: 25px;
+    transform: translate(-25px, -50%);
+  }
+}
