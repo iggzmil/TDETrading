@@ -88,7 +88,7 @@ html, body {
 .center-logo {
     width: 220px;
     height: 180px; /* Further reduced height to bring text even closer */
-    margin-top: -20px; /* Reduced negative margin to create more space between hero image and logo */
+    margin-top: -25px; /* Adjusted to match bottom margin for consistent spacing */
     position: relative;
     margin-bottom: -25px; /* Increased negative margin to pull text much closer */
 }
@@ -154,7 +154,7 @@ body.loaded .launch-screen {
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.main-content.fade-in, .about-section.fade-in, .feature.fade-in {
+.main-content.fade-in, .about-section.fade-in, .services-section.fade-in, .feature.fade-in, .service-item.fade-in, .section-text.fade-in {
     opacity: 1;
     transform: translateY(0);
 }
@@ -167,8 +167,31 @@ body.loaded .launch-screen {
     transform: scale(0.98);
 }
 
-/* About Us Section and Services Section */
-.about-section, .services-section {
+/* About Title and Text */
+.about-title {
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* About Section */
+.about-section {
+    padding: 20px 0 40px;
+    background-color: #111;
+    border-radius: 15px 15px 0 0;
+    margin-top: 10px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Services Section */
+.services-section {
     padding: 20px 0 40px;
     background-color: #111;
     border-radius: 15px 15px 0 0;
@@ -187,12 +210,15 @@ body.loaded .launch-screen {
     text-align: center;
 }
 
-.about-content p {
+.about-text {
     font-size: 16px;
     line-height: 1.5;
     color: #F3F4F6;
     margin-bottom: 20px;
     text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .about-features {
@@ -213,6 +239,7 @@ body.loaded .launch-screen {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
+    margin: 0 20px;
 }
 
 .feature-icon {
@@ -248,6 +275,12 @@ body.loaded .launch-screen {
     margin-top: 0;
     border-radius: 0;
     padding-top: 30px;
+}
+
+.about-content, .services-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .services-content p {
@@ -322,7 +355,7 @@ body.loaded .launch-screen {
     .center-logo {
         width: 180px;
         height: 140px; /* Further reduced height to bring text even closer */
-        margin-top: -15px; /* Reduced negative margin to create more space between hero image and logo */
+        margin-top: -25px; /* Adjusted to match bottom margin for consistent spacing */
         margin-bottom: -25px; /* Increased negative margin to pull text much closer */
     }
 
@@ -343,7 +376,7 @@ body.loaded .launch-screen {
         font-size: 24px;
     }
 
-    .about-content p {
+    .about-text {
         font-size: 15px;
     }
 
@@ -390,7 +423,7 @@ body.loaded .launch-screen {
     .center-logo {
         width: 160px;
         height: 120px; /* Further reduced height to bring text even closer */
-        margin-top: -10px; /* Reduced negative margin to create more space between hero image and logo */
+        margin-top: -25px; /* Adjusted to match bottom margin for consistent spacing */
         margin-bottom: -25px; /* Increased negative margin to pull text much closer */
     }
 
@@ -412,7 +445,7 @@ body.loaded .launch-screen {
         font-size: 22px;
     }
 
-    .about-content p {
+    .about-text {
         font-size: 14px;
     }
 

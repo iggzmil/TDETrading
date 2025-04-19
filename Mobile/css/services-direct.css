@@ -1,0 +1,136 @@
+/* Services Section directly on background */
+.services-title {
+    margin-top: 60px;
+    margin-bottom: 15px;
+    color: #fff;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.services-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #F3F4F6;
+    margin: 0 20px 30px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.service-item {
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 20px 20px;
+    display: flex;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.service-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.service-details {
+    flex: 1;
+}
+
+.service-details h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #00CC61;
+}
+
+.service-details p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #E0E0E0;
+    margin: 0;
+    text-align: left;
+}
+
+/* Animation classes */
+.services-title.fade-in, 
+.services-text.fade-in, 
+.service-item.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Media queries */
+@media (max-height: 700px) {
+    .services-title {
+        font-size: 24px;
+    }
+    
+    .services-text {
+        font-size: 15px;
+    }
+    
+    .service-details h3 {
+        font-size: 16px;
+    }
+    
+    .service-details p {
+        font-size: 13px;
+    }
+    
+    .service-icon img {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 320px) {
+    .services-title {
+        font-size: 22px;
+    }
+    
+    .services-text {
+        font-size: 14px;
+        margin: 0 15px 25px;
+    }
+    
+    .service-item {
+        margin: 0 15px 15px;
+        padding: 12px;
+    }
+    
+    .service-details h3 {
+        font-size: 15px;
+    }
+    
+    .service-details p {
+        font-size: 12px;
+    }
+    
+    .service-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+    
+    .service-icon img {
+        width: 24px;
+        height: 24px;
+    }
+}

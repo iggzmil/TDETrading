@@ -1,0 +1,168 @@
+/*
+ * COMPLETE STANDARDIZED SPACING
+ *
+ * This file applies a consistent spacing system to all elements:
+ * - xs: 8px  (very small gaps)
+ * - sm: 16px (small elements spacing)
+ * - md: 24px (medium spacing between related elements)
+ * - lg: 32px (large spacing between sections)
+ * - xl: 48px (extra large spacing for major sections)
+ */
+
+/* ===== GLOBAL RESET ===== */
+/* First, reset all margins to ensure consistency */
+h1, h2, h3, h4, h5, h6, p, div {
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== TOP SECTION SPACING ===== */
+/* Welcome heading */
+.welcome-heading {
+    margin-top: 16px; /* sm */
+    margin-bottom: 16px; /* sm */
+}
+
+/* Hero container */
+.hero-container {
+    margin-bottom: 16px; /* sm */
+}
+
+/* Title text */
+.title {
+    margin-top: 0;
+    margin-bottom: 8px; /* xs */
+}
+
+/* Logo positioning */
+.center-logo {
+    margin: 16px auto; /* sm - space after heading and before CTA, centered horizontally */
+    width: 220px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+p.title {
+    margin-bottom: 24px; /* md */
+}
+
+/* Main content section */
+.main-content {
+    padding: 0 16px; /* sm */
+    margin-bottom: 24px; /* md */
+}
+
+/* First CTA button */
+.bottom-button {
+    margin-bottom: 32px; /* lg */
+    padding: 0 16px; /* sm */
+}
+
+/* ===== ABOUT SECTION SPACING ===== */
+/* About title */
+.about-title {
+    margin-top: 0; /* Reset from previous CSS */
+    margin-bottom: 16px; /* sm */
+}
+
+/* About text */
+.about-text {
+    margin: 0 16px 24px; /* sm horizontal, md bottom */
+}
+
+/* Feature boxes */
+.feature {
+    margin: 0 16px 16px; /* sm */
+    padding: 16px; /* sm */
+}
+
+.feature:last-of-type {
+    margin-bottom: 24px; /* md */
+}
+
+/* Feature internals */
+.feature-icon {
+    margin-bottom: 8px; /* xs */
+}
+
+.feature h3 {
+    margin-bottom: 8px; /* xs */
+}
+
+/* About CTA button */
+.about-cta {
+    margin-bottom: 32px; /* lg */
+}
+
+/* ===== SERVICES SECTION SPACING ===== */
+/* Services title */
+.services-title {
+    margin-top: 0; /* Reset from previous CSS */
+    margin-bottom: 16px; /* sm */
+}
+
+/* Services text */
+.services-text {
+    margin: 0 16px 24px; /* sm horizontal, md bottom */
+}
+
+/* Service items */
+.service-item {
+    margin: 0 16px 16px; /* sm */
+    padding: 16px; /* sm */
+}
+
+.service-item:last-of-type {
+    margin-bottom: 32px; /* lg */
+}
+
+/* Service item internals */
+.service-icon {
+    margin-right: 16px; /* sm */
+}
+
+.service-details h3 {
+    margin-bottom: 8px; /* xs */
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-height: 700px) {
+    .center-logo {
+        width: 180px;
+        margin: 12px auto;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 320px) {
+    /* Slightly reduce spacing on very small screens */
+    .main-content,
+    .bottom-button,
+    .about-text,
+    .services-text,
+    .feature,
+    .service-item {
+        padding-left: 12px;
+        padding-right: 12px;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .feature,
+    .service-item {
+        padding: 12px;
+    }
+
+    .center-logo {
+        width: 160px;
+        margin: 12px auto;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+}

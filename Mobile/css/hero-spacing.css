@@ -1,0 +1,80 @@
+/* Hero spacing fixes */
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 15px; /* Add some space after the container */
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    margin-bottom: 0; /* Remove any bottom margin */
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.center-logo {
+    width: 220px;
+    height: auto; /* Let height be determined by content */
+    position: relative;
+    margin-top: -40px; /* Overlap with hero image */
+    margin-bottom: 20px; /* Consistent space before title */
+    padding-bottom: 0; /* No padding at bottom */
+}
+
+.center-logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-top: 0; /* No top margin */
+    margin-bottom: 8px;
+    color: #fff;
+    line-height: 1.2; /* Control line height */
+}
+
+/* Media queries for different screen sizes */
+@media (max-height: 700px) {
+    .hero-image {
+        max-width: 250px;
+    }
+    
+    .center-logo {
+        width: 180px;
+        margin-top: -40px;
+        margin-bottom: 20px;
+    }
+    
+    .title {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 320px) {
+    .hero-image {
+        max-width: 220px;
+    }
+    
+    .center-logo {
+        width: 160px;
+        margin-top: -40px;
+        margin-bottom: 20px;
+    }
+    
+    .title {
+        font-size: 34px;
+    }
+}
