@@ -146,7 +146,7 @@ p.title {
     transform: scale(0.98);
 }
 
-/* Section titles */
+/* Section titles - basic styles only, modern styles in modern-design-system.css */
 .section-title,
 .about-title,
 .services-title,
