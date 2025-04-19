@@ -115,27 +115,49 @@ function handleImageErrors() {
 
     // Add error handler to each image
     images.forEach(img => {
+        // Set a successful load handler
+        img.onload = function() {
+            console.log('Image loaded successfully:', this.src);
+
+            // If this is one of our section images, show it and hide the fallback
+            if (this.alt === 'About TDE Trading' || this.alt === 'Our Services') {
+                // Make the image visible with animation
+                this.style.opacity = '1';
+                this.style.transform = 'translateY(0)';
+
+                // Try to find and hide the fallback
+                const container = this.closest('.about-image-container, .services-image-container');
+                if (container) {
+                    const fallback = container.querySelector('.fallback-image');
+                    if (fallback) {
+                        fallback.style.display = 'none';
+                    }
+                }
+            }
+        };
+
+        // Set an error handler
         img.onerror = function() {
             console.log('Error loading image:', this.src);
 
-            // Try alternative paths
-            if (this.src.includes('/Mobile/images/')) {
-                // Try without the /Mobile prefix
-                this.src = this.src.replace('/Mobile/images/', 'images/');
-            } else if (this.src.includes('webp')) {
-                // Try JPG instead of WebP
-                this.src = this.src.replace('.webp', '.jpg');
-            }
+            // Try the logo as a last resort for section images
+            if (this.alt === 'About TDE Trading' || this.alt === 'Our Services') {
+                if (!this.src.includes('TDE-Trading-logo.png')) {
+                    console.log('Trying logo image as fallback');
+                    this.src = 'images/TDE-Trading-logo.png';
+                } else {
+                    // If even the logo fails, hide the image and show the fallback
+                    this.style.display = 'none';
 
-            // If it's one of our specific images, try a direct path
-            if (this.alt === 'About TDE Trading') {
-                // Try different case variations
-                this.src = 'images/About-Us-Mobile.jpg';
-                console.log('Trying capitalized version:', this.src);
-            } else if (this.alt === 'Our Services') {
-                // Try different case variations
-                this.src = 'images/Our-Service-Mobile.jpg';
-                console.log('Trying capitalized version:', this.src);
+                    // Find and show the fallback
+                    const container = this.closest('.about-image-container, .services-image-container');
+                    if (container) {
+                        const fallback = container.querySelector('.fallback-image');
+                        if (fallback) {
+                            fallback.style.display = 'flex';
+                        }
+                    }
+                }
             }
         };
     });

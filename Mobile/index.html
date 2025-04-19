@@ -85,12 +85,11 @@
 
             <!-- About Us Image -->
             <div class="about-image-container">
-                <picture>
-                    <source srcset="images/about-us-mobile.webp" type="image/webp">
-                    <source srcset="images/about-us-mobile.jpg" type="image/jpeg">
-                    <source srcset="images/About-Us-Mobile.jpg" type="image/jpeg">
-                    <img src="images/About-Us-Mobile.jpg" alt="About TDE Trading" class="about-image" loading="lazy">
-                </picture>
+                <!-- Fallback to a colored div if image doesn't load -->
+                <div class="fallback-image about-fallback">
+                    <div class="fallback-text">About Us Image</div>
+                </div>
+                <img src="images/TDE-Trading-logo.png" alt="About TDE Trading" class="about-image" loading="lazy">
             </div>
             </div>
 
@@ -156,12 +155,11 @@
 
             <!-- Services Image -->
             <div class="services-image-container">
-                <picture>
-                    <source srcset="images/our-service-mobile.webp" type="image/webp">
-                    <source srcset="images/our-service-mobile.jpg" type="image/jpeg">
-                    <source srcset="images/Our-Service-Mobile.jpg" type="image/jpeg">
-                    <img src="images/Our-Service-Mobile.jpg" alt="Our Services" class="services-image" loading="lazy">
-                </picture>
+                <!-- Fallback to a colored div if image doesn't load -->
+                <div class="fallback-image services-fallback">
+                    <div class="fallback-text">Our Services Image</div>
+                </div>
+                <img src="images/TDE-Trading-logo.png" alt="Our Services" class="services-image" loading="lazy">
             </div>
             </div>
 
