@@ -9,6 +9,8 @@
   max-width: 350px;
   margin: 30px auto;
   font-family: 'Roboto', sans-serif;
+  scroll-margin-top: 20px; /* Ensures the container is not hidden under any fixed elements when scrolled to */
+  -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
 }
 
 /* Minimized state */

@@ -137,10 +137,51 @@ class TDEChatWidget {
             this.displayExistingMessages();
         }
 
-        // Focus on input
+        // Get the position of the chat widget for scrolling
+        const chatWidgetRect = this.targetElement.getBoundingClientRect();
+        const scrollPosition = window.scrollY + chatWidgetRect.top - 20; // 20px buffer above the widget
+
+        // Scroll the page to show the expanded widget
+        // Use a slight delay to ensure the DOM has updated
         setTimeout(() => {
-            this.chatInput.focus();
-        }, 300);
+            // Detect iOS devices
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+            if (isIOS) {
+                // iOS-specific approach - more reliable on iOS
+                // First, try to use scrollIntoView which works better on iOS
+                this.targetElement.scrollIntoView({ block: 'center' });
+
+                // As a backup, also use window.scrollTo with auto behavior
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: scrollPosition,
+                        behavior: 'auto' // Use instant scroll on iOS
+                    });
+
+                    // Focus on input after a short delay
+                    setTimeout(() => {
+                        this.chatInput.focus();
+                    }, 100);
+                }, 50);
+            } else {
+                // Standard approach for other browsers
+                window.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'smooth'
+                });
+
+                // Focus on input after scrolling
+                setTimeout(() => {
+                    this.chatInput.focus();
+                }, 300);
+
+                // Also call our helper method as a backup
+                setTimeout(() => {
+                    this.ensureWidgetVisible();
+                }, 500);
+            }
+        }, 50);
     }
 
     minimizeWidget() {
@@ -261,6 +302,9 @@ class TDEChatWidget {
 
             // Scroll to bottom
             this.chatBody.scrollTop = this.chatBody.scrollHeight;
+
+            // Ensure the widget is visible on screen
+            this.ensureWidgetVisible();
         }
 
         // Save to localStorage (limit to last 50 messages to prevent storage issues)
@@ -385,5 +429,39 @@ class TDEChatWidget {
             const v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
+    }
+
+    /**
+     * Helper method to ensure the chat widget is visible
+     * This is called when a new message is added or when the widget is expanded
+     */
+    ensureWidgetVisible() {
+        // Only proceed if the widget is expanded
+        if (this.config.minimized) return;
+
+        // Get the position of the chat widget
+        const chatWidgetRect = this.targetElement.getBoundingClientRect();
+
+        // Check if the widget is partially or fully out of view
+        const isPartiallyOutOfView = (
+            chatWidgetRect.bottom > window.innerHeight ||
+            chatWidgetRect.top < 0
+        );
+
+        if (isPartiallyOutOfView) {
+            // Detect iOS devices
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+            // Use the appropriate scrolling method based on the device
+            if (isIOS) {
+                this.targetElement.scrollIntoView({ block: 'center' });
+            } else {
+                const scrollPosition = window.scrollY + chatWidgetRect.top - 20;
+                window.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
     }
 }
