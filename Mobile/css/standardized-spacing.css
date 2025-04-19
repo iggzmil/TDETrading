@@ -1,0 +1,98 @@
+/*
+ * STANDARDIZED SPACING SYSTEM
+ *
+ * This file defines consistent spacing values to be used throughout the mobile site.
+ * It ensures that padding and margins are consistent across all sections.
+ */
+
+/* Section spacing */
+.section-spacing {
+    margin-bottom: 40px;
+}
+
+/* Standard container padding */
+.container {
+    padding: 0 20px;
+}
+
+/* Standard section title spacing */
+.section-title,
+.about-title,
+.services-title,
+.faqs-title,
+.contact-title {
+    margin: 40px 0 30px;
+}
+
+/* Standard bottom button spacing */
+.bottom-button {
+    margin: 30px 0 40px;
+}
+
+/* Standard feature and service item spacing */
+.feature,
+.service-item,
+.faq-item,
+.contact-info-item {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+/* Standard form spacing */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Standard heading spacing */
+h3 {
+    margin-bottom: 10px;
+}
+
+/* Standard paragraph spacing */
+p {
+    margin-bottom: 0;
+}
+
+/* Standard icon spacing */
+.feature-icon,
+.service-icon {
+    margin-bottom: 15px;
+}
+
+/* Standard section text spacing */
+.section-text,
+.about-text,
+.services-text {
+    margin-bottom: 30px;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 375px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section-title,
+    .about-title,
+    .services-title,
+    .faqs-title,
+    .contact-title {
+        margin: 30px 0 20px;
+    }
+    
+    .bottom-button {
+        margin: 25px 0 35px;
+    }
+    
+    .feature,
+    .service-item,
+    .faq-item,
+    .contact-info-item {
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 12px;
+    }
+}

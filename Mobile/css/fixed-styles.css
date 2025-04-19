@@ -82,7 +82,7 @@ html, body {
     width: 100%;
     max-width: 300px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Increased from 20px to 30px for better spacing */
 }
 
 .hero-image img {
@@ -95,7 +95,7 @@ html, body {
 .center-logo {
     width: 200px;
     height: auto;
-    margin: 20px auto;
+    margin: 30px auto; /* Increased from 20px to 30px for better spacing */
     display: flex;
     justify-content: center;
 }
