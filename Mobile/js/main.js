@@ -129,9 +129,13 @@ function handleImageErrors() {
 
             // If it's one of our specific images, try a direct path
             if (this.alt === 'About TDE Trading') {
-                this.src = 'images/about-us-mobile.jpg';
+                // Try different case variations
+                this.src = 'images/About-Us-Mobile.jpg';
+                console.log('Trying capitalized version:', this.src);
             } else if (this.alt === 'Our Services') {
-                this.src = 'images/our-service-mobile.jpg';
+                // Try different case variations
+                this.src = 'images/Our-Service-Mobile.jpg';
+                console.log('Trying capitalized version:', this.src);
             }
         };
     });
