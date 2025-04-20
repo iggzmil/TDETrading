@@ -463,6 +463,11 @@ header.main-header .header-sticky.active{
 	margin: 0;
 }
 
+.navbar-brand img {
+	height: 54px;
+	width: auto;
+}
+
 .main-menu .nav-menu-wrapper{
 	flex: 1;
 	text-align: center;
@@ -5567,8 +5572,9 @@ html {
 }
 
 .main-footer .footer-navigation .footer-logo img.logo-img {
-    height: 42.75px;
+    height: 54px;
     width: auto;
+    margin-left: -15px;
     max-width: none;
     object-fit: contain;
 }
