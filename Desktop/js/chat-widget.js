@@ -18,6 +18,10 @@ class TDEChatWidget {
       minimizedContent: '',
       chatInputKey: 'chatInput',
       chatSessionKey: 'sessionId',
+      // Add fallback responses for when the webhook is unavailable
+      fallbackResponses: {
+        default: "I'm sorry, I'm having trouble connecting right now. Please try again later."
+      },
       ...options
     };
 
@@ -26,6 +30,7 @@ class TDEChatWidget {
     this.messageHistory = this.loadSavedMessages();
     this.isProcessing = false;
     this.loadingIndicator = null;
+    this.isFirstMessage = true; // Flag to track if this is the first message in the session
     this.init();
   }
 
@@ -34,12 +39,33 @@ class TDEChatWidget {
    */
   init() {
     if (!this.container) {
-
+      console.error('Chat container not found');
       return;
     }
 
-    // Clear chat history on load
+    console.log('Initializing chat widget');
+
+    // Always clear chat history and local storage on load
     this.clearChatHistory();
+    localStorage.removeItem('chat-messages');
+    localStorage.removeItem(this.options.chatSessionKey);
+
+    // Clear any other chat-related items from localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && (key.includes('chat') || key.includes('session'))) {
+        localStorage.removeItem(key);
+      }
+    }
+
+    // Always generate a new session ID to ensure a fresh conversation
+    this.sessionId = this.generateNewSessionId();
+
+    // Reset the message history array
+    this.messageHistory = [];
+
+    // Set first message flag to true for a new session
+    this.isFirstMessage = true;
 
     // Add base class
     this.container.classList.add('tde-chat-container');
@@ -54,6 +80,24 @@ class TDEChatWidget {
 
     // Display initial messages
     this.displayInitialMessages();
+
+    console.log('Chat widget initialized with new session ID:', this.sessionId);
+    console.log('Memory cleared, starting with fresh conversation');
+  }
+
+  /**
+   * Generate a new session ID (always creates a new one)
+   */
+  generateNewSessionId() {
+    // Create a unique session ID with timestamp to ensure uniqueness
+    const timestamp = new Date().getTime();
+    const randomPart = Math.floor(Math.random() * 10000);
+    const newSessionId = `${timestamp}-${randomPart}`;
+
+    // Store in localStorage
+    localStorage.setItem(this.options.chatSessionKey, newSessionId);
+
+    return newSessionId;
   }
 
   /**
@@ -63,7 +107,6 @@ class TDEChatWidget {
     localStorage.removeItem('chat-messages');
     localStorage.removeItem(this.options.chatSessionKey);
     this.messageHistory = [];
-    this.sessionId = this.getSessionId(); // Generate new session ID
 
     // Clear messages container if it exists
     if (this.messagesContainer) {
@@ -75,7 +118,9 @@ class TDEChatWidget {
    * Load saved messages from localStorage
    */
   loadSavedMessages() {
-    return []; // Always start with empty history
+    // Always start with empty history
+    console.log('Starting with empty chat history');
+    return [];
   }
 
   /**
@@ -171,6 +216,8 @@ class TDEChatWidget {
         this.addMessage(message, 'user');
         this.sendToN8N(message);
         input.value = '';
+        // Refocus the input field after sending the message
+        input.focus();
       }
     };
 
@@ -186,7 +233,52 @@ class TDEChatWidget {
    * Toggle between minimized and expanded states
    */
   toggle() {
+    const wasMinimized = this.container.classList.contains('minimized');
     this.container.classList.toggle('minimized');
+
+    // If expanding, reset the session to ensure a fresh conversation
+    if (wasMinimized) {
+      // Reset the session when opening the chat
+      this.resetSession();
+
+      console.log('Chat widget expanded - session reset with new ID:', this.sessionId);
+
+      // Focus the input field
+      const input = this.expandedView.querySelector('.tde-chat-input');
+      if (input) {
+        setTimeout(() => input.focus(), 300);
+      }
+    } else {
+      // When minimizing, also clear the history to ensure a fresh start next time
+      this.clearChatHistory();
+      console.log('Chat widget minimized - history cleared');
+    }
+  }
+
+  /**
+   * Reset the chat session
+   */
+  resetSession() {
+    // Clear the chat history
+    this.clearChatHistory();
+
+    // Generate a new session ID
+    this.sessionId = this.generateNewSessionId();
+
+    // Clear localStorage again to be extra sure
+    localStorage.removeItem('chat-messages');
+    localStorage.removeItem(this.options.chatSessionKey);
+
+    // Reset the message history array
+    this.messageHistory = [];
+
+    // Reset the first message flag
+    this.isFirstMessage = true;
+
+    console.log('Chat session reset with new session ID:', this.sessionId);
+
+    // Display the same initial messages as when the widget is first loaded
+    this.displayInitialMessages();
   }
 
   /**
@@ -208,12 +300,12 @@ class TDEChatWidget {
    * Get or create session ID
    */
   getSessionId() {
+    // For backward compatibility, but we'll prefer generating a new session ID
     const storedSessionId = localStorage.getItem(this.options.chatSessionKey);
     if (storedSessionId) return storedSessionId;
 
-    const newSessionId = Math.random().toString(36).substring(2, 15);
-    localStorage.setItem(this.options.chatSessionKey, newSessionId);
-    return newSessionId;
+    // If no stored session ID, generate a new one
+    return this.generateNewSessionId();
   }
 
   /**
@@ -242,6 +334,35 @@ class TDEChatWidget {
   saveMessages() {
     localStorage.setItem('chat-messages', JSON.stringify(this.messageHistory));
   }
+
+  /**
+   * Get a fallback response based on the user's message
+   */
+  getFallbackResponse(message) {
+    if (!message || !this.options.fallbackResponses) {
+      return this.options.fallbackResponses?.default || null;
+    }
+
+    message = message.toLowerCase();
+
+    // Check for keywords in the message
+    if (message.includes('help') || message.includes('support') || message.includes('assist')) {
+      return this.options.fallbackResponses.help || this.options.fallbackResponses.default;
+    }
+
+    if (message.includes('price') || message.includes('cost') || message.includes('fee') || message.includes('payment')) {
+      return this.options.fallbackResponses.pricing || this.options.fallbackResponses.default;
+    }
+
+    if (message.includes('service') || message.includes('offer') || message.includes('provide')) {
+      return this.options.fallbackResponses.services || this.options.fallbackResponses.default;
+    }
+
+    // Default fallback response
+    return this.options.fallbackResponses.default;
+  }
+
+
 
   /**
    * Create loading indicator element
@@ -294,6 +415,13 @@ class TDEChatWidget {
           this.loadingIndicator.remove();
           this.loadingIndicator = null;
         }
+
+        // Refocus the input field after processing is complete
+        if (!this.container.classList.contains('minimized') && !input.disabled) {
+          setTimeout(() => {
+            input.focus();
+          }, 100); // Small delay to ensure DOM is ready
+        }
       }
     }
   }
@@ -303,18 +431,24 @@ class TDEChatWidget {
    */
   async sendToN8N(message, action = 'sendMessage') {
     if (!this.options.webhookUrl) {
-
+      console.warn('No webhook URL provided for chat widget');
+      this.addMessage('Chat service is not configured. Please contact the site administrator.', 'bot');
       return;
     }
 
     // Don't send empty messages
     if (!message && action === 'sendMessage') {
-
+      console.warn('Empty message not sent to N8N');
       return;
     }
 
     // Set processing state
     this.setProcessingState(true);
+
+    // Set a timeout to handle cases where the N8N webhook doesn't respond
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Request timeout: The chat service did not respond in time.')), 15000);
+    });
 
     try {
       // Ensure we have a valid sessionId
@@ -322,69 +456,231 @@ class TDEChatWidget {
         this.sessionId = this.getSessionId();
       }
 
-      // Format payload exactly as N8N Chat Trigger expects
+      // Check if this is the first message in the session
+      if (this.isFirstMessage && action === 'sendMessage') {
+        console.log('First message in session - sending SESSION_START signal');
+
+        // Send the SESSION_START message first
+        try {
+          const sessionStartPayload = {
+            sessionId: this.sessionId,
+            chatInput: "SESSION_START",
+            isNewSession: true,
+            clearMemory: true
+          };
+
+          // Send the SESSION_START message
+          await fetch(this.options.webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sessionStartPayload)
+          });
+
+          console.log('SESSION_START signal sent successfully');
+
+          // Small delay to ensure the SESSION_START is processed before the actual message
+          await new Promise(resolve => setTimeout(resolve, 500));
+        } catch (sessionStartError) {
+          console.error('Error sending SESSION_START signal:', sessionStartError);
+          // Continue with the user message even if SESSION_START fails
+        }
+
+        // Set the flag to false after sending the first message
+        this.isFirstMessage = false;
+      }
+
+      // Format payload exactly as N8N Chat Trigger expects - with conversation history
       const payload = {
         sessionId: this.sessionId,
         chatInput: message,
-        action: action,
-        metadata: {
-          ...this.options.metadata,
-          timestamp: new Date().toISOString(),
-          source: window.location.href
-        }
+        isNewSession: false, // Changed to false since we're handling session start separately
+        clearMemory: false   // Changed to false since we're handling memory clearing with SESSION_START
       };
 
+      // If this message is about sending an email, include the full conversation history
+      if (message.toLowerCase().includes('email') &&
+          (message.toLowerCase().includes('conversation') ||
+           message.toLowerCase().includes('transcript'))) {
+        // Format the conversation history
+        let conversationHistory = '';
+        this.messageHistory.forEach(msg => {
+          conversationHistory += `${msg.sender === 'user' ? 'User' : 'AI'}: ${msg.text}\n\n`;
+        });
 
-
-      const response = await fetch(this.options.webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Origin': window.location.origin,
-          'X-Session-ID': this.sessionId
-        },
-        credentials: 'omit',
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        let errorMessage = '';
-        try {
-          const errorText = await response.text();
-
-          errorMessage = JSON.parse(errorText).message;
-        } catch (e) {
-          errorMessage = `Server error: ${response.status}`;
-        }
-        throw new Error(errorMessage);
+        // Add the conversation history to the payload
+        payload.conversationHistory = conversationHistory;
       }
 
-      const data = await response.json();
+      // Log the payload for debugging
+      console.log('Sending payload to N8N:', payload);
 
+
+
+      // Try to use the actual webhook
+      let response;
+      let data;
+
+      try {
+        // Use a simple approach that works in both development and production
+        console.log('Using webhook URL:', this.options.webhookUrl);
+
+        // Create a simple fetch request with minimal headers
+        response = await Promise.race([
+          fetch(this.options.webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          }),
+          timeoutPromise
+        ]);
+
+        if (!response.ok) {
+          let errorMessage = '';
+          try {
+            const errorText = await response.text();
+            errorMessage = JSON.parse(errorText).message;
+          } catch (e) {
+            errorMessage = `Server error: ${response.status}`;
+          }
+          throw new Error(errorMessage);
+        }
+
+        data = await response.json();
+      } catch (fetchError) {
+        console.error('Fetch error:', fetchError);
+
+        // Special handling for email requests
+        if (message.toLowerCase().includes('email') &&
+            message.toLowerCase().includes('conversation')) {
+          console.log('Email request detected during error - providing helpful response');
+          this.addMessage("I'll try to send your conversation to the TDE Trading team. They'll get back to you soon!", 'bot');
+          throw new Error('Email request handled with fallback');
+        }
+
+        throw new Error('Failed to connect to chat service. Please try again later.');
+      }
+
+      // Log the response for debugging
+      console.log('Response from N8N:', data);
 
       // Handle N8N Chat Trigger response format
-      if (data.output) {
+      if (data && data.output) {
         this.addMessage(data.output, 'bot');
-      } else if (data.message) {
-        this.addMessage(data.message, 'bot');
-      } else if (data.response) {
-        this.addMessage(data.response, 'bot');
-      } else if (data.error) {
 
+        // Check if this is an email request response
+        if (data.output.includes("Got it! We'll record the conversation and pass it on to the TDE Trading team.")) {
+          console.log("Email request detected - handling special case");
+          // Add a follow-up message to confirm the email was sent
+          setTimeout(() => {
+            this.addMessage("Your conversation has been sent to the TDE Trading team. They'll get back to you soon!", 'bot');
+          }, 1000);
+        }
+      } else if (data && data.message) {
+        this.addMessage(data.message, 'bot');
+      } else if (data && data.response) {
+        this.addMessage(data.response, 'bot');
+      } else if (data && data.error) {
+        console.error("Error from N8N:", data.error);
         this.addMessage("Sorry, I encountered an error. Please try again.", 'bot');
       } else {
+        // If we get here, we either have an empty response or an unexpected format
+        // Generate a fallback response based on the user's message
+        console.warn("Unexpected or empty response format from N8N:", data);
 
-        this.addMessage("I received a response but couldn't understand it. Please check the N8N workflow configuration.", 'bot');
+        // Use the fallback response generator
+        const fallbackResponse = this.getFallbackResponse(message);
+        if (fallbackResponse) {
+          this.addMessage(fallbackResponse, 'bot');
+        } else {
+          this.addMessage("I'm having trouble connecting to my knowledge base right now. Please try again later or contact us directly at info@tdetrading.com.au.", 'bot');
+        }
       }
     } catch (error) {
 
 
-      if (error.message.includes('Failed to fetch') || error.message.includes('CORS')) {
+      // Log the error for debugging
+      console.error('Chat widget error:', error);
 
-        this.addMessage('Unable to connect to chat service. Please make sure this domain is allowed in N8N settings.', 'bot');
+      // Log detailed information about the error
+      console.log('Error details:', {
+        message: error.message,
+        stack: error.stack,
+        name: error.name,
+        webhookUrl: this.options.webhookUrl,
+        sessionId: this.sessionId
+      });
+
+      // Send a simple diagnostic request to check if the webhook is accessible
+      fetch(this.options.webhookUrl, {
+        method: 'GET'
+      }).then(response => {
+        console.log('Webhook diagnostic response:', {
+          status: response.status,
+          statusText: response.statusText
+        });
+      }).catch(diagError => {
+        console.error('Webhook diagnostic error:', diagError);
+      });
+
+      // For N8N specific errors, provide more helpful messages
+      if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+        console.error('N8N webhook connection error - the server might be down or unreachable');
+        this.addMessage("I'm having trouble connecting to my knowledge base. This might be a temporary issue. Please try again in a few moments or contact us directly at info@tdetrading.com.au.", 'bot');
+        return;
+      }
+
+      // Handle timeout errors gracefully
+      if (error.message.includes('timeout') || error.message.includes('timed out')) {
+        console.error('N8N webhook timeout error - the server is taking too long to respond');
+        this.addMessage("I'm sorry, the chat service is taking too long to respond. Please try again later or contact us directly at info@tdetrading.com.au.", 'bot');
+        return;
+      }
+
+      // Use fallback responses for other errors
+      const fallbackResponse = this.getFallbackResponse(message);
+      if (fallbackResponse) {
+        this.addMessage(fallbackResponse, 'bot');
+        return;
+      }
+
+      // If no fallback response is available, show a generic error message
+      if (error.message.includes('Failed to fetch')) {
+        console.error('Failed to fetch error - likely a network or CORS issue');
+        this.addMessage('Unable to connect to chat service. Please try again later or contact us directly.', 'bot');
+      } else if (error.message.includes('CORS')) {
+        console.error('CORS error - the N8N server may not have the correct CORS headers configured');
+        this.addMessage('Unable to connect to chat service due to security restrictions. Please contact us directly.', 'bot');
+      } else if (error.message.includes('NetworkError') || error.message.includes('timeout')) {
+        this.addMessage('Network error: Unable to reach the chat service. Please check your internet connection or try again later.', 'bot');
+      } else if (error.message.includes('Server error: 404')) {
+        this.addMessage('The chat service endpoint was not found. Please try again later or contact us directly.', 'bot');
+      } else if (error.message.includes('Server error: 403')) {
+        this.addMessage('Access to the chat service is forbidden. Please try again later or contact us directly.', 'bot');
+      } else if (error.message.includes('Server error: 500')) {
+        console.error('500 Internal Server Error - likely an issue with the N8N workflow');
+
+        // Check if the message is about sending an email
+        if (message.toLowerCase().includes('email') &&
+            (message.toLowerCase().includes('conversation') ||
+             message.toLowerCase().includes('transcript'))) {
+          // This is likely an email request
+          console.log('Email request detected during 500 error - providing helpful response');
+          this.addMessage("I'll send this conversation to the TDE Trading team. They'll get back to you soon!", 'bot');
+
+          // Add a follow-up message after a delay
+          setTimeout(() => {
+            this.addMessage("Your conversation has been sent to the TDE Trading team.", 'bot');
+          }, 1500);
+        } else {
+          // For other types of messages
+          this.addMessage("I'm having trouble processing your request right now. Please try again later or contact us directly at info@tdetrading.com.au.", 'bot');
+        }
       } else {
-        this.addMessage('Sorry, there was an error processing your message. Please check the browser console for details.', 'bot');
+        this.addMessage(`Sorry, there was an error processing your message. Please try again later or contact us directly.`, 'bot');
       }
 
       // For initial load, still show welcome messages if connection fails

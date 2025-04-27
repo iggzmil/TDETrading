@@ -8,10 +8,27 @@ $(document).ready(function() {
     const urlParams = new URLSearchParams(window.location.search);
     const shouldOpenChat = urlParams.get('openChat') === 'true';
 
-    // Initialize chat widget
+    // Clear any existing chat data from localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && (key.includes('chat') || key.includes('session'))) {
+            localStorage.removeItem(key);
+        }
+    }
+
+    console.log('Cleared all chat-related data from localStorage');
+
+    // Initialize chat widget with a fresh session
     const chatWidget = new TDEChatWidget({
         target: 'chat-container',
         webhookUrl: 'https://n8n.aaa-city.com/webhook/b65d66e7-3096-4fb0-8265-21418a9fb73c/chat',
+        // Add a fallback response for when the webhook is unavailable
+        fallbackResponses: {
+            default: "I'm sorry, I'm having trouble connecting to my knowledge base right now. Please try again later or contact us directly at info@tdetrading.com.au.",
+            help: "For immediate assistance, please email us at info@tdetrading.com.au or call (+61) 430 333 813.",
+            pricing: "For pricing information, please visit our pricing page or contact us directly.",
+            services: "We offer various trading education services. You can find more details on our services page."
+        },
         initialMessages: [
             'Hi there! 👋',
             'Welcome to TDE Trading. How can I help you today?',

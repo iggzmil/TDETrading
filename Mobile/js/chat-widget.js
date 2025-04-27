@@ -17,6 +17,7 @@ class TDEChatWidget {
 
         this.messages = [];
         this.isTyping = false;
+        this.isFirstMessage = true; // Flag to track if this is the first message in the session
         this.sessionId = this.generateSessionId();
 
         this.init();
@@ -117,6 +118,10 @@ class TDEChatWidget {
         this.config.minimized = false;
         this.renderFullWidget();
         this.addEventListeners();
+
+        // Reset the first message flag when expanding the widget
+        this.isFirstMessage = true;
+
         this.showInitialMessages();
 
         // Focus on input
@@ -126,9 +131,15 @@ class TDEChatWidget {
     }
 
     minimizeWidget() {
+        // Save the first message flag state
+        const wasFirstMessage = this.isFirstMessage;
+
         this.config.minimized = true;
         this.createWidgetStructure();
         this.addEventListeners();
+
+        // Restore the first message flag
+        this.isFirstMessage = wasFirstMessage;
     }
 
     showInitialMessages() {
@@ -221,7 +232,42 @@ class TDEChatWidget {
         }
     }
 
-    sendToWebhook(message) {
+    async sendToWebhook(message) {
+        // Check if this is the first message in the session
+        if (this.isFirstMessage && this.config.webhookUrl) {
+            console.log('First message in session - sending SESSION_START signal');
+
+            // Send the SESSION_START message first
+            try {
+                const sessionStartPayload = {
+                    sessionId: this.sessionId,
+                    chatInput: "SESSION_START",
+                    isNewSession: true,
+                    clearMemory: true
+                };
+
+                // Send the SESSION_START message
+                await fetch(this.config.webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(sessionStartPayload)
+                });
+
+                console.log('SESSION_START signal sent successfully');
+
+                // Small delay to ensure the SESSION_START is processed before the actual message
+                await new Promise(resolve => setTimeout(resolve, 500));
+            } catch (sessionStartError) {
+                console.error('Error sending SESSION_START signal:', sessionStartError);
+                // Continue with the user message even if SESSION_START fails
+            }
+
+            // Set the flag to false after sending the first message
+            this.isFirstMessage = false;
+        }
+
         // Simulate response for demo purposes
         setTimeout(() => {
             this.hideTypingIndicator();

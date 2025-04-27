@@ -17,6 +17,7 @@ class TDEChatWidget {
 
         this.messages = [];
         this.isTyping = false;
+        this.isFirstMessage = true; // Flag to track if this is the first message in the session
 
         // Clear any existing chat history
         localStorage.removeItem('tde-chat-messages');
@@ -130,6 +131,9 @@ class TDEChatWidget {
         // Restore messages
         this.messages = currentMessages;
 
+        // Reset the first message flag when expanding the widget
+        this.isFirstMessage = true;
+
         // If this is the first time opening, show initial messages
         // Otherwise, display the existing conversation
         if (isFirstOpen) {
@@ -189,6 +193,9 @@ class TDEChatWidget {
         // Save current messages before minimizing
         const currentMessages = [...this.messages];
 
+        // Save the first message flag state
+        const wasFirstMessage = this.isFirstMessage;
+
         // Update state and recreate structure
         this.config.minimized = true;
         this.createWidgetStructure();
@@ -196,6 +203,9 @@ class TDEChatWidget {
 
         // Restore only the messages from this session
         this.messages = currentMessages;
+
+        // Restore the first message flag
+        this.isFirstMessage = wasFirstMessage;
     }
 
     /**
@@ -301,7 +311,7 @@ class TDEChatWidget {
         const messageElement = document.createElement('div');
         messageElement.className = `tde-chat-message tde-chat-message-${sender}`;
         messageElement.textContent = text;
-        
+
         // Add to chat body
         this.chatBody.appendChild(messageElement);
 
@@ -331,7 +341,7 @@ class TDEChatWidget {
             <div class="tde-chat-typing-dot"></div>
             <div class="tde-chat-typing-dot"></div>
         `;
-        
+
         typingIndicator.id = 'typing-indicator';
         this.chatBody.appendChild(typingIndicator);
         this.chatBody.scrollTop = this.chatBody.scrollHeight;
@@ -340,7 +350,7 @@ class TDEChatWidget {
     hideTypingIndicator() {
         if (!this.isTyping) return;
         this.isTyping = false;
-        
+
         const typingIndicator = document.getElementById('typing-indicator');
         if (typingIndicator) {
             typingIndicator.remove();
@@ -357,11 +367,47 @@ class TDEChatWidget {
         this.showTypingIndicator();
 
         try {
+            // Check if this is the first message in the session
+            if (this.isFirstMessage) {
+                console.log('First message in session - sending SESSION_START signal');
+
+                // Send the SESSION_START message first
+                try {
+                    const sessionStartPayload = {
+                        sessionId: this.sessionId,
+                        chatInput: "SESSION_START",
+                        isNewSession: true,
+                        clearMemory: true
+                    };
+
+                    // Send the SESSION_START message
+                    await fetch(this.config.webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(sessionStartPayload)
+                    });
+
+                    console.log('SESSION_START signal sent successfully');
+
+                    // Small delay to ensure the SESSION_START is processed before the actual message
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                } catch (sessionStartError) {
+                    console.error('Error sending SESSION_START signal:', sessionStartError);
+                    // Continue with the user message even if SESSION_START fails
+                }
+
+                // Set the flag to false after sending the first message
+                this.isFirstMessage = false;
+            }
+
             // Format payload exactly as N8N Chat Trigger expects (matching desktop version)
             const payload = {
                 sessionId: this.sessionId,
                 chatInput: message,
-                action: 'sendMessage',
+                isNewSession: false, // Changed to false since we're handling session start separately
+                clearMemory: false,  // Changed to false since we're handling memory clearing with SESSION_START
                 metadata: {
                     ...this.config.metadata,
                     timestamp: new Date().toISOString(),

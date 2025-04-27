@@ -5569,12 +5569,13 @@ html {
     display: flex;
     align-items: center;
     width: auto;
+    padding-left: 0; /* Removed padding */
 }
 
 .main-footer .footer-navigation .footer-logo img.logo-img {
     height: 54px;
     width: auto;
-    margin-left: -15px;
+    margin-left: 0; /* Removed negative margin */
     max-width: none;
     object-fit: contain;
 }
@@ -5611,7 +5612,7 @@ html {
 .main-footer .footer-contact-box .footer-cta-box {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    padding: 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 15px; /* Adjusted to match container padding */
     width: 100%;
     margin: 0;
     border: none;
@@ -5619,7 +5620,7 @@ html {
 
 .main-footer .footer-contact-box .connect-with-us {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Restored to center alignment */
     align-items: center;
     gap: 3rem;
     width: 100%;
@@ -5711,6 +5712,14 @@ html {
     margin-top: 10px;
     opacity: 0.8;
     font-style: italic;
+}
+
+.credit-text {
+    display: block;
+    font-size: 14px;
+    margin-top: 10px;
+    opacity: 0.8;
+    font-style: normal;
 }
 
 .warning-text {
